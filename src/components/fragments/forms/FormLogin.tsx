@@ -32,7 +32,7 @@ const FormLogin = () => {
 
 	useEffect(() => {
 		setRequisitionResult({
-			messages: Object.values(router.query)[0],
+			messages: router.query.message,
 			status: Number(router.query.status),
 		});
 	}, [router.query]);
@@ -43,7 +43,6 @@ const FormLogin = () => {
 				messages={requisitionResult?.messages}
 				status={requisitionResult?.status}
 			/>
-
 			<AppStaticInput
 				{...emailLoginInput}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
