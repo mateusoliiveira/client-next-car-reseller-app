@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.globalFont {
+	font-family: "Open Sans", sans-serif !important;
+	font-weight: "600" !important;
+}
+
+.fade-in {
+	animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.bg-image {
+	background-image: url("../assets/bg.svg");
+	background-size: cover;
+}
+
+.car-hero {
+	filter: drop-shadow(-5px 5px 5px black);
+	z-index: 1;
+	animation: bouncingCar 1s infinite linear alternate-reverse;
+}
+@keyframes bouncingCar {
+	0% {
+		margin-top: -0.3rem;
+	}
+	100% {
+		margin-top: 0.3rem;
+	}
+}
+
+.wrapper-runner {
+	transform: rotate(-4deg);
+	margin-top: -1.75rem;
+	z-index: 2;
+	margin-left: 1rem;
+}
+
+.nav-black-please {
+	background-color: "black" !important;
+}
+
+.road-runner {
+	border-bottom: 3px solid yellow;
+	-webkit-animation: road-runner 0.8s cubic-bezier(0.55, 0.055, 0.675, 0.19)
+		0.8s infinite both;
+	animation: road-runner 0.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0.8s
+		infinite reverse both;
+}
+
+nav {
+	background-color: transparent !important;
+}
+
+@-webkit-keyframes road-runner {
+	0% {
+		-webkit-transform: scaleX(-0.1);
+		transform: scaleX(-0.1);
+		-webkit-transform-origin: -0% -0%;
+		transform-origin: -10% -10%;
+	}
+	100% {
+		-webkit-transform: scaleX(0.9);
+		transform: scaleX(0.9);
+		-webkit-transform-origin: -0% -0%;
+		transform-origin: -10% -10%;
+	}
+}
+@keyframes road-runner {
+	0% {
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0);
+		-webkit-transform-origin: -0% -0%;
+		transform-origin: -10% -10%;
+	}
+	100% {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1);
+		-webkit-transform-origin: -0% -0%;
+		transform-origin: -10% -10%;
+	}
+}
+
+.scroll-cars::-webkit-scrollbar {
+	width: 6px; /* width of the entire scrollbar */
+}
+
+.scroll-cars::-webkit-scrollbar-track {
+	background: grey; /* color of the tracking area */
+}
+
+.scroll-cars::-webkit-scrollbar-thumb {
+	background-color: white; /* color of the scroll thumb */
+}
+
+.scroll-cars {
+	scrollbar-width: thin; /* "auto" or "thin" */
+	scrollbar-color: white grey; /* scroll thumb and track */
+}
+
+.not-found-cars {
+	background: rgba(255, 56, 58, 0.3);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+}
