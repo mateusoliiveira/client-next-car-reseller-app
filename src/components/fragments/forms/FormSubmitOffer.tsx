@@ -75,7 +75,6 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 			);
 			navigate.push("/conta?after=createOffer");
 		} catch (error: any) {
-			console.error(error.response);
 			setRequisitionResult({
 				messages: Object.values(error.response.data.errors).flat(2),
 				status: error.response.status,
