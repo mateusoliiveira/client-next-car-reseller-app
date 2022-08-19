@@ -11,41 +11,31 @@ import {
 import AppStaticForm from "../inert/AppStaticForm";
 import AppStaticButton from "../inert/AppStaticButton";
 import { Credential } from "../../../interfaces/Credential";
+import { RequisitionResult } from "../../../interfaces/RequisitionResult";
 
 const FormLogin = () => {
 	const router = useRouter();
-	const [requisitionResult, setRequisitionResult] = useState<any>({});
+	const [requisitionResult, setRequisitionResult] = useState<
+		RequisitionResult | undefined
+	>({
+		messages: "",
+		status: 0,
+	});
 	const [user, setUser] = useState<Credential>({
 		email: "",
 		password: "",
 	});
 
 	const handleLogin = async () => {
-		try {
-			setRequisitionResult(undefined);
-			await signIn("credentials", { ...user });
-		} catch (error: any) {
-			setRequisitionResult({
-				messages: Object.values(error.response.data.errors).flat(2),
-				status: error.response.status,
-			});
-		}
+		await signIn("credentials", { ...user });
 	};
 
-	const catchLoginFailedAttempt = () => router.query.error;
-
 	useEffect(() => {
-		const getErrorIfExists = catchLoginFailedAttempt();
-		if (
-			typeof getErrorIfExists === "string" &&
-			getErrorIfExists !== undefined
-		) {
-			setRequisitionResult({
-				messages: ["Usuário ou senha incorretos"],
-				status: Number(getErrorIfExists.match(/\d+/g)),
-			});
-		}
-	}, []);
+		setRequisitionResult({
+			messages: Object.values(router.query)[0],
+			status: Number(router.query.status),
+		});
+	}, [router.query]);
 
 	return (
 		<AppStaticForm>

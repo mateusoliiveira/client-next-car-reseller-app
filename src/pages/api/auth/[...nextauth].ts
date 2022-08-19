@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
 					})
 					return { ...data.user, admin: !!data.user.admin, token: data.token }
 				} catch (error: any) {
-					throw new Error(`${error.response.data.config.log}&status=${error.response.data.statusCode}`, { cause: error.response.data })
+					throw new Error(`${Object.values(error.response.data).flat(2)}&status=${error.response.status}`, { cause: error.response.data })
 				}
 			}
 		})

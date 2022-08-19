@@ -6,7 +6,7 @@ const AppMutableAlert = ({
 	messages,
 	status = 200,
 }: {
-	messages: string[];
+	messages?: string | string[];
 	status?: number;
 }) => {
 	return (
