@@ -1,14 +1,9 @@
 import { Toast } from "flowbite-react";
 import React from "react";
 import { handleFeedbackColor } from "../../../../src/_utils";
+import { RequisitionResult } from "../../../interfaces/RequisitionResult";
 
-const AppMutableAlert = ({
-	messages,
-	status = 200,
-}: {
-	messages?: string | string[];
-	status?: number;
-}) => {
+const AppMutableAlert = ({ messages, status = 200 }: RequisitionResult) => {
 	return (
 		<div className="justify-center mb-10">
 			{messages ? (

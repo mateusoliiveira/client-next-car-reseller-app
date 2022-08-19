@@ -32,7 +32,7 @@ const FormLogin = () => {
 
 	useEffect(() => {
 		setRequisitionResult({
-			messages: router.query.message,
+			messages: router.query.error,
 			status: Number(router.query.status),
 		});
 	}, [router.query]);
