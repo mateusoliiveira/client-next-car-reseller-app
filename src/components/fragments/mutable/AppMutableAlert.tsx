@@ -48,7 +48,7 @@ const AppMutableAlert = ({
 									status
 								)} items-center justify-center rounded-lg ml-2 mr-4 shadow-sm text-sm font-normal`}
 							>
-								{">"}
+								{"!"}
 							</div>
 							<div
 								className={`ml-2 text-sm font-normal text-${handleFeedbackColor(
