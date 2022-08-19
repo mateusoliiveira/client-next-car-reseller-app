@@ -237,10 +237,9 @@ const AppMutableAvailableOffers = ({
 					<Accordion.Panel>
 						<Accordion.Title>Câmbio</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center text-red-600 font-bold -mx-1">
+							<form className="flex-col justify-center text-red-600 font-bold -mx-1 min-w-100">
 								<Select
 									id="countries"
-									className="min-w-100"
 									onChange={(e: any) =>
 										setFilters({
 											...filters,
