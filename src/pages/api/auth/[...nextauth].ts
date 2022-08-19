@@ -17,7 +17,7 @@ export const authOptions: NextAuthOptions = {
 						email: credentials?.email,
 						password: credentials?.password
 					})
-					return { ...data.user, admin: !!data.user.admin, token: data.token }
+					return { ...data.user, admin: !!data.user.role, token: data.token }
 				} catch (error: any) {
 					throw new Error(`${Object.values(error.response.data).flat(2)}&status=${error.response.status}`, { cause: error.response.data })
 				}
