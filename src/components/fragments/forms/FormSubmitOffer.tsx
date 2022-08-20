@@ -92,7 +92,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 				/>
 			</div>
 			<div className="font-bold text-white">
-				<div className="lg:flex m-auto w-1/2 justify-evenly gap-x-5">
+				<div className="lg:flex m-auto lg:w-1/2 px-3 lg:px-0 justify-evenly gap-x-5">
 					<div className="lg:w-2/3 mx-5 py-5">
 						<AppStaticSubmitOfferPath
 							offer={offer}
