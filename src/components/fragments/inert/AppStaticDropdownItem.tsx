@@ -4,7 +4,7 @@ const AppStaticDropdownItem = ({
 	children,
 }: ComponentChildren): ReactElement => {
 	return (
-		<div className="cursor-pointer shadow text-black border-b-2 p-3 hover:bg-gray-100 transition-all">
+		<div className="cursor-pointer shadow text-black border-b-2 p-3 text-xs hover:bg-gray-100 transition-all">
 			{children}
 		</div>
 	);

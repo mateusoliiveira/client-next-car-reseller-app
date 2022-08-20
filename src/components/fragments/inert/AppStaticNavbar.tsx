@@ -7,7 +7,7 @@ import AppStaticLink from "./AppStaticLink";
 const AppStaticNavbar = () => {
 	const authed = useSession().data?.user;
 	return (
-		<Navbar fluid={true} className="bg-transparent py-9 pt-5 px-10 xl:px-80">
+		<Navbar fluid={true} className="bg-transparent">
 			<Navbar.Brand>
 				<Link href="/">
 					<div className="self-center text-4xl cursor-pointer">

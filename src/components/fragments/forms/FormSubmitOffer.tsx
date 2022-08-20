@@ -32,6 +32,7 @@ import {
 	carsFiltered,
 	checkIfAreAllFilled,
 	cleanOffer,
+	formatToBRL,
 } from "../../../_utils";
 
 type Steps = {
@@ -83,289 +84,273 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 	};
 
 	return (
-		<div className="lg:w-5/6 container md:justify-evenly px-0 lg:px-40 m-auto font-bold">
-			<div className="text-gray-600 body-font">
-				<div className="container px-5 py-20 pb-24 mx-auto flex flex-wrap">
-					<div className="m-auto">
-						<AppMutableAlert
-							messages={requisitionResult?.messages}
-							status={requisitionResult?.status}
+		<div className="m-auto">
+			<div className="m-auto">
+				<AppMutableAlert
+					messages={requisitionResult?.messages}
+					status={requisitionResult?.status}
+				/>
+			</div>
+			<div className="font-bold text-white">
+				<div className="lg:flex m-auto w-1/2 justify-evenly gap-x-5">
+					<div className="lg:w-2/3 mx-5 py-5">
+						<AppStaticSubmitOfferPath
+							offer={offer}
+							stepToCheck={"greenIfBrandModelCategoryIsFilled"}
+							nextStep={() => setActualStep("first")}
+							info={{
+								header: "Marca, modelo e categoria",
+								description: "Busque o modelo correspondente ao seu carro.",
+							}}
+							icon={<FaCar className="text-gray-600 drop-shadow" />}
+						/>
+						<AppStaticSubmitOfferPath
+							offer={offer}
+							stepToCheck={"greenIfTitleDescriptionPriceIsFilled"}
+							nextStep={() => setActualStep("second")}
+							info={{
+								header: "Informações sobre o carro",
+								description:
+									"Além do preço, crie um título e fale sobre o carro",
+							}}
+							icon={<FaInfo className="text-gray-600 drop-shadow" />}
+						/>
+						<AppStaticSubmitOfferPath
+							offer={offer}
+							stepToCheck={"greenIfContactZipCodeIsFilled"}
+							nextStep={() => setActualStep("third")}
+							info={{
+								header: "Dados para contato e local",
+								description: "Onde está o carro e como entrar em contato?",
+							}}
+							icon={<FaMap className="text-gray-600 drop-shadow" />}
+						/>
+						<AppStaticSubmitOfferPath
+							offer={offer}
+							stepToCheck={"greenIfContactZipCodeIsFilled"}
+							nextStep={() => setActualStep("fourth")}
+							last={true}
+							info={{
+								header: "Fotos",
+								description: "Anúncios com foto vendem até 3x mais rápido 📸🎇",
+							}}
+							icon={<FaCamera className="text-gray-600 drop-shadow" />}
 						/>
 					</div>
-					<div className="lg:flex flex-wrap w-full text-blue-600">
-						<div className="lg:w-2/5 md:pr-10 md:py-3">
-							<div className="flex relative pb-12">
-								<AppStaticSubmitOfferPath
-									offer={offer}
-									stepToCheck={"greenIfBrandModelCategoryIsFilled"}
-									nextStep={() => setActualStep("first")}
-									info={{
-										header: "Marca, modelo e categoria",
-										description:
-											"Busque o modelo correspondente ao seu carro e em qual categoria seu anúncio se encaixa: sedãs, hatches, etc.",
-									}}
-									icon={<FaCar className="text-gray-600 drop-shadow" />}
-								/>
-							</div>
-							<div className="flex relative pb-12">
-								<AppStaticSubmitOfferPath
-									offer={offer}
-									stepToCheck={"greenIfTitleDescriptionPriceIsFilled"}
-									nextStep={() => setActualStep("second")}
-									info={{
-										header: "Informações sobre o carro",
-										description:
-											"O carro está em bom estado? Documento em dia? Há algo a fazer? A hora de dizer isso é agora!",
-									}}
-									icon={<FaInfo className="text-gray-600 drop-shadow" />}
-								/>
-							</div>
-							<div className="flex relative pb-12">
-								<AppStaticSubmitOfferPath
-									offer={offer}
-									stepToCheck={"greenIfContactZipCodeIsFilled"}
-									nextStep={() => setActualStep("third")}
-									info={{
-										header: "Dados para contato e local",
-										description:
-											"Informe aqui telefone, com DDD, e o CEP de onde o carro está, para que o comprador lhe contacte",
-									}}
-									icon={<FaMap className="text-gray-600 drop-shadow" />}
-								/>
-							</div>
-							<div className="flex relative pb-12">
-								<div className="h-full w- absolute inset-0 flex items-center justify-center"></div>
-								<AppStaticSubmitOfferPath
-									offer={offer}
-									stepToCheck={"greenIfContactZipCodeIsFilled"}
-									nextStep={() => setActualStep("fourth")}
-									last={true}
-									info={{
-										header: "Fotos",
-										description:
-											"Um anúncio com foto vende até 3x mais rápido do que anúncios sem foto. Capriche nas fotos! 📸🎇",
-									}}
-									icon={<FaCamera className="text-gray-600 drop-shadow" />}
-								/>
-							</div>
-						</div>
-						<div className="flex w-auto lg:w-3/5 object-cover object-center">
-							<div className={actualStep === "first" ? "" : "hidden"}>
-								<AppStaticTab>
-									<div className="flex flex-col w-full gap-5">
-										<div className="gap-3 flex w-100">
-											<div className="w-1/2">
-												<div className="gap-5 bg-white p-2 border mt-2 rounded-lg">
-													<div
-														style={{
-															padding: 3,
-														}}
-													>
-														<AppStaticInput
-															{...submitOfferFindBrandInput}
-															onChange={(e: ChangeEvent<HTMLInputElement>) =>
-																setKeywordBrand(e.target.value)
-															}
-														/>
-														<div className="h-40 overflow-auto mt-2">
-															{brandsList &&
-																brandsFiltered(keywordBrand, brandsList)?.map(
-																	(brand: Brand) => {
-																		return (
-																			<div
-																				className={`${
-																					offer.brand_id === brand.id
-																						? "border border-purple-600 rounded"
-																						: ""
-																				}`}
-																				key={brand.id}
-																				onClick={() =>
-																					setVehiclesList([...brand.vehicles])
-																				}
-																			>
-																				<AppStaticDropdownItem>
-																					<>
-																						<p className="mb-1">{`${brand.name}`}</p>
-																						<hr />
-																						<small>{`${brand.vehicles.length} modelos`}</small>
-																					</>
-																				</AppStaticDropdownItem>
-																			</div>
-																		);
-																	}
-																)}
-														</div>
-													</div>
-												</div>
-											</div>
-											<div className="w-1/2">
-												<div className="gap-5 bg-white p-2 border mt-2 rounded-lg">
-													<div
-														style={{
-															padding: 3,
-														}}
-													>
-														<AppStaticInput
-															{...submitOfferFindVehicleInput}
-															onChange={(e: ChangeEvent<HTMLInputElement>) =>
-																setKeywordVehicle(e.target.value)
-															}
-														/>
-														<div className="h-40 overflow-auto mt-2">
-															{vehiclesList &&
-																carsFiltered(keywordVehicle, vehiclesList)?.map(
-																	(vehicle: Vehicle) => {
-																		return (
-																			<div
-																				className={`${
-																					offer.vehicle_id === vehicle.id
-																						? "border border-purple-600 rounded"
-																						: ""
-																				}`}
-																				key={vehicle.id}
-																				onClick={() =>
-																					setOffer({
-																						...offer,
-																						brand_id: vehicle.brand_id,
-																						category_id: vehicle.category_id,
-																						vehicle_id:
-																							vehicle.id === offer.vehicle_id
-																								? ""
-																								: vehicle.id,
-																					})
-																				}
-																			>
-																				<AppStaticDropdownItem>
-																					<>
-																						<p className="mb-1">{`${vehicle.name} ${vehicle.year}`}</p>
-																						<hr />
-																						<small>{`${
-																							vehicle.doors
-																						}p | ${Number(
-																							vehicle.liters
-																						).toFixed(1)} ${
-																							vehicle.cylinders
-																						}cl.`}</small>
-																					</>
-																				</AppStaticDropdownItem>
-																			</div>
-																		);
-																	}
-																)}
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div id="select">
-											<AppStaticSelect
-												{...submitOfferSelectVehicleCategory}
-												value={offer.category_id}
-												onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-													setOffer({ ...offer, category_id: e.target.value })
-												}
+					<div className={`w-full ${actualStep === "first" ? "" : "hidden"}`}>
+						<AppStaticTab>
+							<div className="flex flex-col gap-y-5">
+								<div className="gap-2 flex">
+									<div className="w-1/2">
+										<div className="gap-5 bg-white p-2 border mt-2 rounded-lg">
+											<div
+												style={{
+													padding: 3,
+												}}
 											>
-												<option disabled key={0}>
-													selecione a categoria do seu auto
-												</option>
-												{categories?.map((category: Category): ReactElement => {
-													return (
-														<option value={category.id} key={category.id}>
-															{category.name}
-														</option>
-													);
-												})}
-											</AppStaticSelect>
-										</div>
-										<AppStaticButton
-											{...submitOfferButtonNextStage}
-											onClick={() => setActualStep("second")}
-										/>
-									</div>
-								</AppStaticTab>
-							</div>
-							<div className={actualStep === "second" ? "" : "hidden"}>
-								<AppStaticTab>
-									<div className="flex flex-col gap-5 w-full">
-										<AppStaticInput
-											{...submitOfferInputSecondStageTitle}
-											value={offer.title}
-											onChange={(e: ChangeEvent<HTMLInputElement>) =>
-												setOffer({ ...offer, title: e.target.value })
-											}
-										/>
-										<AppStaticInput
-											{...submitOfferInputSecondStageDescription}
-											value={offer.description}
-											onChange={(e: ChangeEvent<HTMLInputElement>) =>
-												setOffer({ ...offer, description: e.target.value })
-											}
-										/>
-										<AppStaticInput
-											{...submitOfferInputSecondStagePrice}
-											value={offer.price}
-											onChange={(e: ChangeEvent<HTMLInputElement>) => {
-												setOffer({ ...offer, price: e.target.value });
-											}}
-										/>
-										<AppStaticButton
-											{...submitOfferButtonNextStage}
-											onClick={() => setActualStep("third")}
-										/>
-									</div>
-								</AppStaticTab>
-							</div>
-							<div className={actualStep === "third" ? "" : "hidden"}>
-								<AppStaticTab>
-									<form className="flex flex-col gap-5 m-auto">
-										<AppStaticInput
-											{...submitOfferInputThirdStagePhone}
-											value={offer.contact}
-											onChange={(e: ChangeEvent<HTMLInputElement>) =>
-												setOffer({ ...offer, contact: e.target.value })
-											}
-										/>
-
-										<AppStaticInput
-											{...submitOfferInputThirdStageZipCode}
-											value={offer.zip_code}
-											onChange={(e: ChangeEvent<HTMLInputElement>) =>
-												setOffer({ ...offer, zip_code: e.target.value })
-											}
-										/>
-
-										<AppStaticButton
-											{...submitOfferButtonNextStage}
-											onClick={() => setActualStep("fourth")}
-										/>
-									</form>
-								</AppStaticTab>
-							</div>
-							<div className={actualStep === "fourth" ? "" : "hidden"}>
-								<AppStaticTab>
-									<div className="flex flex-col gap-5 m-auto">
-										{checkIfAreAllFilled(offer) ? (
-											<div className="mb-2">
-												<AppStaticPhotoUploader
-													onSuccess={(url: string) => setPictureUrl(url)}
+												<AppStaticInput
+													{...submitOfferFindBrandInput}
+													onChange={(e: ChangeEvent<HTMLInputElement>) =>
+														setKeywordBrand(e.target.value)
+													}
 												/>
-
-												{pictureUrl ? (
-													<AppStaticButton
-														{...submitOfferButtonSubmit}
-														onClick={() => handlePublish()}
-													/>
-												) : (
-													""
-												)}
+												<div className="h-40 overflow-auto mt-2">
+													{brandsList &&
+														brandsFiltered(keywordBrand, brandsList)?.map(
+															(brand: Brand) => {
+																return (
+																	<div
+																		className={`${
+																			offer.brand_id === brand.id
+																				? "border border-purple-600 rounded"
+																				: ""
+																		}`}
+																		key={brand.id}
+																		onClick={() =>
+																			setVehiclesList([...brand.vehicles])
+																		}
+																	>
+																		<AppStaticDropdownItem>
+																			<>
+																				<p className="mb-1">{`${brand.name}`}</p>
+																				<hr />
+																				<small>{`${brand.vehicles.length} modelos`}</small>
+																			</>
+																		</AppStaticDropdownItem>
+																	</div>
+																);
+															}
+														)}
+												</div>
 											</div>
+										</div>
+									</div>
+									<div className="w-1/2">
+										<div className="gap-5 bg-white p-2 border mt-2 rounded-lg">
+											<div
+												style={{
+													padding: 3,
+												}}
+											>
+												<AppStaticInput
+													{...submitOfferFindVehicleInput}
+													onChange={(e: ChangeEvent<HTMLInputElement>) =>
+														setKeywordVehicle(e.target.value)
+													}
+												/>
+												<div className="h-40 overflow-auto mt-2">
+													{vehiclesList &&
+														carsFiltered(keywordVehicle, vehiclesList)?.map(
+															(vehicle: Vehicle) => {
+																return (
+																	<div
+																		className={`${
+																			offer.vehicle_id === vehicle.id
+																				? "border border-purple-600 rounded"
+																				: ""
+																		}`}
+																		key={vehicle.id}
+																		onClick={() =>
+																			setOffer({
+																				...offer,
+																				brand_id: vehicle.brand_id,
+																				category_id: vehicle.category_id,
+																				vehicle_id:
+																					vehicle.id === offer.vehicle_id
+																						? ""
+																						: vehicle.id,
+																			})
+																		}
+																	>
+																		<AppStaticDropdownItem>
+																			<>
+																				<p className="mb-1">{`${vehicle.name} ${vehicle.year}`}</p>
+																				<hr />
+																				<small>{`${vehicle.doors}p | ${Number(
+																					vehicle.liters
+																				).toFixed(1)} ${
+																					vehicle.cylinders
+																				}cl.`}</small>
+																			</>
+																		</AppStaticDropdownItem>
+																	</div>
+																);
+															}
+														)}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="select">
+									<AppStaticSelect
+										{...submitOfferSelectVehicleCategory}
+										value={offer.category_id}
+										onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+											setOffer({ ...offer, category_id: e.target.value })
+										}
+									>
+										<option disabled key={0}>
+											selecione a categoria do seu auto
+										</option>
+										{categories?.map((category: Category): ReactElement => {
+											return (
+												<option value={category.id} key={category.id}>
+													{category.name}
+												</option>
+											);
+										})}
+									</AppStaticSelect>
+								</div>
+								<AppStaticButton
+									{...submitOfferButtonNextStage}
+									onClick={() => setActualStep("second")}
+								/>
+							</div>
+						</AppStaticTab>
+					</div>
+					<div className={`w-full ${actualStep === "second" ? "" : "hidden"}`}>
+						<AppStaticTab>
+							<AppStaticInput
+								{...submitOfferInputSecondStageTitle}
+								value={offer.title}
+								onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									setOffer({ ...offer, title: e.target.value })
+								}
+							/>
+							<AppStaticInput
+								{...submitOfferInputSecondStageDescription}
+								value={offer.description}
+								onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									setOffer({ ...offer, description: e.target.value })
+								}
+							/>
+
+							<>
+								<AppStaticInput
+									{...submitOfferInputSecondStagePrice}
+									value={offer.price}
+									onChange={(e: ChangeEvent<HTMLInputElement>) => {
+										setOffer({ ...offer, price: e.target.value });
+									}}
+								/>
+								<p className="border-b-2 text-center text-white mb-5 rounded">
+									{formatToBRL(offer.price)}
+								</p>
+							</>
+							<AppStaticButton
+								{...submitOfferButtonNextStage}
+								onClick={() => setActualStep("third")}
+							/>
+						</AppStaticTab>
+					</div>
+					<div className={`w-full ${actualStep === "third" ? "" : "hidden"}`}>
+						<AppStaticTab>
+							<AppStaticInput
+								{...submitOfferInputThirdStagePhone}
+								value={offer.contact}
+								onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									setOffer({ ...offer, contact: e.target.value })
+								}
+							/>
+
+							<AppStaticInput
+								{...submitOfferInputThirdStageZipCode}
+								value={offer.zip_code}
+								onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									setOffer({ ...offer, zip_code: e.target.value })
+								}
+							/>
+
+							<AppStaticButton
+								{...submitOfferButtonNextStage}
+								onClick={() => setActualStep("fourth")}
+							/>
+						</AppStaticTab>
+					</div>
+					<div className={`w-full ${actualStep === "fourth" ? "" : "hidden"}`}>
+						<AppStaticTab>
+							<div className="flex flex-col gap-5 m-auto">
+								{checkIfAreAllFilled(offer) ? (
+									<div className="mb-2">
+										<AppStaticPhotoUploader
+											onSuccess={(url: string) => setPictureUrl(url)}
+										/>
+
+										{pictureUrl ? (
+											<AppStaticButton
+												{...submitOfferButtonSubmit}
+												onClick={() => handlePublish()}
+											/>
 										) : (
-											<AppStaticSubmitOfferMissingFill />
+											""
 										)}
 									</div>
-								</AppStaticTab>
+								) : (
+									<AppStaticSubmitOfferMissingFill />
+								)}
 							</div>
-						</div>
+						</AppStaticTab>
 					</div>
 				</div>
 			</div>

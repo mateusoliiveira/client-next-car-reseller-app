@@ -45,7 +45,7 @@ const AppStaticSubmitOfferPath = ({
 	};
 
 	return (
-		<>
+		<div className="flex relative pb-16">
 			<div className="h-full w-10 absolute inset-0 flex items-center justify-center">
 				<div
 					className={`${!!last || "h-full"} w-1 ${handleStepAlreadyDone(
@@ -67,9 +67,9 @@ const AppStaticSubmitOfferPath = ({
 				<h2 className="title-font text-sm text-gray-300 mb-1 font-extrabold tracking-wider">
 					{info.header}
 				</h2>
-				<p className="leading-relaxed">{info.description}</p>
+				<p className="leading-relaxed text-xs">{info.description}</p>
 			</div>
-		</>
+		</div>
 	);
 };
 
