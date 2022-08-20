@@ -59,7 +59,7 @@ const FormSearch = (props: any) => {
 			</h2>
 			<div className="w-50 flex justify-center">
 				<form onSubmit={(e) => e.preventDefault()}>
-					<div className="md:flex justify-content-center gap-5 items-baseline">
+					<div className="md:flex justify-content-center gap-5 items-baseline rounded-3xl p-10 shadow-sm shadow-gray-500 hover:shadow-red-800 transition-all">
 						<div className="mb-20 md:mb-10 lg:mb-0">
 							<AppStaticInput
 								{...findInput}
@@ -78,13 +78,11 @@ const FormSearch = (props: any) => {
 									)
 								}
 							/>
-							<div className=" absolute">
-								<AppStaticLink
-									{...findLink}
-									disabled={!keywordModel}
-									href={`/busca/veiculo?title=${keywordModel}`}
-								/>
-							</div>
+							<AppStaticLink
+								{...findLink}
+								disabled={!keywordModel}
+								href={`/busca/veiculo?title=${keywordModel}`}
+							/>
 						</div>
 						<div className="">
 							<Dropdown
@@ -95,15 +93,18 @@ const FormSearch = (props: any) => {
 									padding: 3,
 								}}
 							>
-								<TextInput
-									list="brands"
-									name="brands"
-									helperText="busque pela marca do automóvel"
-									onChange={(e: ChangeEvent<HTMLInputElement>) =>
-										setKeywordBrand(e.target.value)
-									}
-								/>
-								<div className="h-20 overflow-auto">
+								<div className="p-3">
+									<TextInput
+										list="brands"
+										name="brands"
+										helperText="busque pela marca do automóvel"
+										onChange={(e: ChangeEvent<HTMLInputElement>) =>
+											setKeywordBrand(e.target.value)
+										}
+									/>
+								</div>
+
+								<div className="h-30 overflow-auto">
 									{brandsList &&
 										allOrFiltered().map((brand: Brand) => {
 											return (
