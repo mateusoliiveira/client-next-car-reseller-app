@@ -13,10 +13,10 @@ const Index: NextPage<IndexAttributes> = ({
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
 	const brands = await ApiClient.get("/brands");
 	const offers = await ApiClient.get("/offers");
-	//res.setHeader(
-	//	"Cache-Control",
-	//	"public, s-maxage=360, stale-while-revalidate=3600"
-	//);
+	res.setHeader(
+		"Cache-Control",
+		"public, s-maxage=30, stale-while-revalidate=300"
+	);
 	if (!brands || !offers) {
 		return { notFound: true };
 	}
