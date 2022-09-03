@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { formatToBRL, hideData, hideEmail } from "../../../../src/_utils";
 
-const Profile = ({ user }: any) => {
+const AppMutableUserProfilePage = ({ user }: any) => {
 	return (
 		<div className="col lg:flex">
 			<div className="hidden">
@@ -126,4 +126,4 @@ const Profile = ({ user }: any) => {
 	);
 };
 
-export default Profile;
+export default AppMutableUserProfilePage;

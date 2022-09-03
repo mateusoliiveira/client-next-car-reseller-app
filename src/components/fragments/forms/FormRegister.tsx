@@ -20,9 +20,17 @@ import {
 import { ApiClient } from "../../../_services";
 
 const FormRegister = () => {
-	const router = useRouter();
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
-	const [requisitionResult, setRequisitionResult] = useState<any>(undefined);
+	const [requisitionResult, setRequisitionResult] = useState<{
+		errors?: {
+			[x: string]: string | string[];
+		};
+		success?: {
+			[x: string]: string | string[];
+		};
+	} | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [errors, setErrors] = useState<null>();
 	const [user, setUser] = useState<NewCredential>({
 		email: "",
 		name: "",
@@ -30,40 +38,39 @@ const FormRegister = () => {
 	});
 
 	const handleRegister = async () => {
-		setRequisitionResult(undefined);
+		setErrors(null);
 		if (user.password !== confirmPassword)
 			return setRequisitionResult({
-				messages: ["Senhas não coincidem"],
-				status: 400,
+				errors: {
+					confirmPassword: "senhas não conferem",
+				},
 			});
 		try {
+			setIsLoading(true);
 			const request = await ApiClient.post("/guests/register", user);
-			return setRequisitionResult({
-				messages: [request.data.message],
-				status: request.status,
+			setRequisitionResult({
+				success: request.data.message,
 			});
 		} catch (error: any) {
-			setRequisitionResult({
-				messages: Object.values(error.response.data.errors).flat(2),
-				status: error.response.status,
-			});
+			setRequisitionResult({ errors: error.response.data.errors });
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
 		<AppStaticForm>
-			<AppMutableAlert
-				messages={requisitionResult?.messages}
-				status={requisitionResult?.status}
-			/>
+			<AppMutableAlert message={requisitionResult?.success} />
 			<AppStaticInput
 				{...emailRegisterInput}
+				validation={requisitionResult?.errors?.email ?? ""}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
 					setUser({ ...user, email: e.target.value })
 				}
 			/>
 			<AppStaticInput
 				{...nameRegisterInput}
+				validation={requisitionResult?.errors?.name ?? ""}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
 					setUser({ ...user, name: e.target.value })
 				}
@@ -72,6 +79,7 @@ const FormRegister = () => {
 				<div className="w-1/2">
 					<AppStaticInput
 						{...passwordRegisterInput}
+						validation={requisitionResult?.errors?.password ?? ""}
 						onChange={(e: ChangeEvent<HTMLInputElement>) =>
 							setUser({ ...user, password: e.target.value })
 						}
@@ -80,13 +88,18 @@ const FormRegister = () => {
 				<div className="w-1/2">
 					<AppStaticInput
 						{...passwordConfirmationRegisterInput}
+						validation={requisitionResult?.errors?.confirmPassword ?? ""}
 						onChange={(e: ChangeEvent<HTMLInputElement>) =>
 							setConfirmPassword(e.target.value)
 						}
 					/>
 				</div>
 			</div>
-			<AppStaticButton {...loginButton} onClick={() => handleRegister()} />
+			<AppStaticButton
+				{...loginButton}
+				isLoading={isLoading}
+				onClick={() => handleRegister()}
+			/>
 		</AppStaticForm>
 	);
 };

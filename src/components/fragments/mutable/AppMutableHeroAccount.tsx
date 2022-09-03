@@ -5,6 +5,7 @@ import AppMutableUserProfilePostedOffers from "./AppMutableUserProfilePostedOffe
 import { User } from "../../../../src/interfaces/User";
 import { PostedOffer } from "../../../../src/interfaces/Offer";
 import AppStaticTab from "../inert/AppStaticTab";
+import AppMutableUserProfileEdit from "./AppMutableUserProfileEdit";
 
 const AppMutableHeroAccount = ({
 	user,
@@ -26,7 +27,7 @@ const AppMutableHeroAccount = ({
 				</Tabs.Item>
 				<Tabs.Item title="Editar minha conta">
 					<AppStaticTab>
-						<></>
+						<AppMutableUserProfileEdit user={user} />
 					</AppStaticTab>
 				</Tabs.Item>
 				<Tabs.Item title="Meus Anúncios (em breve)" disabled={true}>

@@ -23,7 +23,7 @@ export default async function handler(
 			const { data } = await ApiServer.patch(`/users`, req.body, {
 				headers: { Authorization: 'Bearer ' + token }
 			})
-			res.status(201).json(data)
+			res.status(200).json(data)
 		} catch (error: any) {
 			res.status(error.response.status).json(error.response.data)
 		}

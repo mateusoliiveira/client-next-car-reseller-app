@@ -3,12 +3,12 @@ import React from "react";
 import { handleFeedbackColor } from "../../../../src/_utils";
 import { RequisitionResult } from "../../../interfaces/RequisitionResult";
 
-const AppMutableAlert = ({ messages, status = 200 }: RequisitionResult) => {
+const AppMutableAlert = ({ message, status = 200 }: RequisitionResult) => {
 	return (
 		<div className="justify-center mb-5 mt-10">
-			{messages ? (
-				Array.isArray(messages) ? (
-					messages.map((msg: string, index: number) => {
+			{message ? (
+				Array.isArray(message) ? (
+					message.map((msg: string, index: number) => {
 						return (
 							<div className="flex pb-3 flex-row gap-4 justify-center">
 								<Toast key={index}>
@@ -50,7 +50,7 @@ const AppMutableAlert = ({ messages, status = 200 }: RequisitionResult) => {
 									status
 								)}`}
 							>
-								{messages}
+								{String(message)}
 							</div>
 							<Toast.Toggle />
 						</Toast>

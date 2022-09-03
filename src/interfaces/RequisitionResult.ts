@@ -1,4 +1,6 @@
 export interface RequisitionResult {
-	messages?: string | string[];
+	message?: {
+		[x: string]: string | string[];
+	}
 	status?: number;
 };

@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from "axios";
-import { clientURLApi, serverURLApi } from "./config/api";
+import { clientURLApiDEV, serverURLApiDEV } from "../apiDEV";
 
 export const ApiServer: AxiosInstance = axios.create({
-	baseURL: serverURLApi,
+	baseURL: serverURLApiDEV,
 });
 
 export const ApiClient: AxiosInstance = axios.create({
-	baseURL: clientURLApi,
+	baseURL: clientURLApiDEV,
 	headers: {
 		'Accept': 'application/json',
 		'Content-Type': 'application/json',

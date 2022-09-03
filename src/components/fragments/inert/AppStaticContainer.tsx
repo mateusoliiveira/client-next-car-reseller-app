@@ -9,7 +9,7 @@ const AppStaticContainer = ({ children }: ComponentChildren): ReactElement => {
 		<AppStaticMain>
 			<AppStaticNavbar />
 			<section>
-				<div className="mt-5 bg-gray-900 m-auto text-xs justify-center text-center text-white">
+				<div className="mt-5 bg-transparent m-auto text-xs justify-center text-center text-white">
 					site criado para fins de estudo sobre desenvolvimento web, todos os
 					anúncios são fictícios e as imagens de seus respectivos donos
 				</div>
