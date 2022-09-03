@@ -79,8 +79,8 @@ const FormAccountEdit = () => {
 				}
 			/>
 			<AppStaticButton
-				disabled={!user.name}
 				{...editNameButton}
+				disabled={!user.name}
 				isLoading={isLoading.name}
 				onClick={() => handleEditName()}
 			/>
@@ -113,8 +113,8 @@ const FormAccountEdit = () => {
 				</div>
 			</div>
 			<AppStaticButton
-				disabled={!user.password && !confirmPassword}
 				{...editPasswordButton}
+				disabled={!user.password && !confirmPassword}
 				isLoading={isLoading.password}
 				onClick={() => handleEditPassword()}
 			/>

@@ -62,6 +62,7 @@ const FormSearch = (props: any) => {
 					<div className="md:flex justify-content-center gap-5 items-baseline rounded-3xl p-10 shadow-sm shadow-gray-500 hover:shadow-red-800 transition-all">
 						<div className="mb-20 md:mb-10 lg:mb-0">
 							<AppStaticInput
+								validation={""}
 								{...findInput}
 								onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
 									keyDownCheck(e)

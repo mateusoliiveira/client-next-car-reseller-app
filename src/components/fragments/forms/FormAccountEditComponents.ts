@@ -1,6 +1,6 @@
 
 export const nameEditInput = {
-	id: "name",
+	id: "new-name",
 	type: "text",
 	placeholder: "rafael silva",
 	required: true,
