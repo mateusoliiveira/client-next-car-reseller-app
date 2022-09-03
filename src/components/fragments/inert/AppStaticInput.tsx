@@ -17,7 +17,7 @@ const AppStaticInput = ({
 	onPaste,
 }: TextInputProps &
 	InputHTMLAttributes<HTMLInputElement> & {
-		validation: string | string[];
+		validation?: string | string[];
 	}): ReactElement => {
 	return (
 		<div className="relative mb-4 my-1">

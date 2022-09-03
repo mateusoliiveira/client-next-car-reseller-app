@@ -8,7 +8,7 @@ const AppStaticButton = ({
 	title,
 	id,
 }: ButtonHTMLAttributes<HTMLButtonElement> & {
-	isLoading: boolean;
+	isLoading?: boolean;
 }): ReactElement => {
 	return (
 		<Button id={id} disabled={disabled} onClick={onClick}>

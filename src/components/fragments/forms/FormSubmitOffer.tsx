@@ -45,7 +45,15 @@ type Stp = keyof Steps;
 
 const FormSubmitOffer = ({ categories, brands, token }: any) => {
 	const navigate = useRouter();
-	const [requisitionResult, setRequisitionResult] = useState<any>(undefined);
+	const [requisitionResult, setRequisitionResult] = useState<{
+		errors?: {
+			[x: string]: string | string[];
+		};
+		success?: {
+			[x: string]: string | string[];
+		};
+	} | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [brandsList, setBrandsList] = useState<Brand[]>(
 		brands.filter(
 			(b: any) =>
@@ -60,8 +68,8 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 	const [offer, setOffer] = useState<Offer>(cleanOffer());
 
 	const handlePublish = async () => {
-		setRequisitionResult(undefined);
-		console.log(offer);
+		setRequisitionResult(null);
+		setIsLoading(true);
 		try {
 			await ApiClient.post(
 				"/offers",
@@ -76,21 +84,14 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 			);
 			navigate.push("/conta?after=createOffer");
 		} catch (error: any) {
-			setRequisitionResult({
-				messages: Object.values(error.response.data.errors).flat(2),
-				status: error.response.status,
-			});
+			setRequisitionResult({ errors: error.response.data.errors });
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
 		<div className="m-auto">
-			<div className="m-auto">
-				<AppMutableAlert
-					messages={requisitionResult?.messages}
-					status={requisitionResult?.status}
-				/>
-			</div>
 			<div className="font-bold text-white">
 				<div className="lg:flex m-auto lg:w-1/2 px-3 lg:px-0 justify-evenly gap-x-5">
 					<div className="lg:w-2/3 mx-5 py-5">
@@ -272,6 +273,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 					<div className={`w-full ${actualStep === "second" ? "" : "hidden"}`}>
 						<AppStaticTab>
 							<AppStaticInput
+								validation={requisitionResult?.errors?.title ?? ""}
 								{...submitOfferInputSecondStageTitle}
 								value={offer.title}
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -279,6 +281,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 								}
 							/>
 							<AppStaticInput
+								validation={requisitionResult?.errors?.description ?? ""}
 								{...submitOfferInputSecondStageDescription}
 								value={offer.description}
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -288,6 +291,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 
 							<>
 								<AppStaticInput
+									validation={requisitionResult?.errors?.price ?? ""}
 									{...submitOfferInputSecondStagePrice}
 									value={offer.price}
 									onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -307,6 +311,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 					<div className={`w-full ${actualStep === "third" ? "" : "hidden"}`}>
 						<AppStaticTab>
 							<AppStaticInput
+								validation={requisitionResult?.errors?.contact ?? ""}
 								{...submitOfferInputThirdStagePhone}
 								value={offer.contact}
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -315,6 +320,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 							/>
 
 							<AppStaticInput
+								validation={requisitionResult?.errors?.zip_code ?? ""}
 								{...submitOfferInputThirdStageZipCode}
 								value={offer.zip_code}
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>

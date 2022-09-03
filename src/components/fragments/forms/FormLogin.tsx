@@ -11,7 +11,6 @@ import {
 import AppStaticForm from "../inert/AppStaticForm";
 import AppStaticButton from "../inert/AppStaticButton";
 import { Credential } from "../../../interfaces/Credential";
-import { RequisitionResult } from "../../../interfaces/RequisitionResult";
 
 const FormLogin = () => {
 	const router = useRouter();
