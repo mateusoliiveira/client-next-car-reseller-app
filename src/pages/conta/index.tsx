@@ -29,6 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 	const { data } = await ApiClient.get("/users", {
 		headers: { ...req.headers },
 	});
+	console.log(data);
 	res.setHeader(
 		"Cache-Control",
 		"public, s-maxage=30, stale-while-revalidate=120"

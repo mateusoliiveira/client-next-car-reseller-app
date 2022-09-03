@@ -110,7 +110,9 @@ export function parseSubmitOfferErrorFields(reqResErr: any) {
 	return Object.values(
 		reqResErr?.errors
 	)
-		.map((err: any) => err.map((err: string) => err.split(" ")[2]))
+		.map((err: any) => err
+			.map((err: string) => err
+				.split(" ")[2]))
 		.join(", ")
 }
 

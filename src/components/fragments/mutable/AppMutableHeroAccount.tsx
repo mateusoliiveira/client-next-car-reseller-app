@@ -30,7 +30,7 @@ const AppMutableHeroAccount = ({
 						<AppMutableUserProfileEdit user={user} />
 					</AppStaticTab>
 				</Tabs.Item>
-				<Tabs.Item title="Meus Anúncios (em breve)" disabled={true}>
+				<Tabs.Item title="Meus Anúncios (em breve)">
 					<AppStaticTab>
 						<AppMutableUserProfilePostedOffers offers={offers} />
 					</AppStaticTab>
