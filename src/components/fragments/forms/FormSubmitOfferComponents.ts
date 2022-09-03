@@ -73,6 +73,7 @@ export const submitOfferButtonNextStage = {
 
 export const submitOfferButtonSubmit = {
 	id: "submit",
+	style: { marginTop: 10 },
 	title: 'enviar meu anúncio',
 }
 

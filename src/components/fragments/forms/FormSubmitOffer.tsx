@@ -33,6 +33,7 @@ import {
 	checkIfAreAllFilled,
 	cleanOffer,
 	formatToBRL,
+	parseSubmitOfferErrorFields,
 } from "../../../_utils";
 
 type Steps = {
@@ -94,7 +95,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 		<div className="m-auto">
 			<div className="font-bold text-white">
 				<div className="lg:flex m-auto lg:w-1/2 px-3 lg:px-0 justify-evenly gap-x-5">
-					<div className="lg:w-2/3 mx-5 py-5">
+					<div className="lg:w-2/3 mt-5 mx-5 py-5">
 						<AppStaticSubmitOfferPath
 							offer={offer}
 							stepToCheck={"greenIfBrandModelCategoryIsFilled"}
@@ -345,6 +346,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 
 										{pictureUrl ? (
 											<AppStaticButton
+												isLoading={isLoading}
 												{...submitOfferButtonSubmit}
 												onClick={() => handlePublish()}
 											/>
@@ -354,6 +356,16 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 									</div>
 								) : (
 									<AppStaticSubmitOfferMissingFill />
+								)}
+
+								{requisitionResult?.errors ? (
+									<p className="border-red-500 border-2 p-5 w-auto rounded-md">
+										{`Algo não está completo no(s) campo(s) ${parseSubmitOfferErrorFields(
+											requisitionResult
+										)}. Confira onde você pode corrigir ao lado.`}
+									</p>
+								) : (
+									""
 								)}
 							</div>
 						</AppStaticTab>

@@ -12,6 +12,11 @@ import {
 	newPasswordConfirmationEditInput,
 } from "./FormAccountEditComponents";
 import { ApiClient } from "../../../_services";
+import {
+	PHRASE_GENERIC_CHANGE,
+	PHRASE_NEW_PASSWORD,
+	PHRASE_PASSWORDS_DONT_MATCH,
+} from "../../../config/constants";
 
 const FormAccountEdit = () => {
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -34,9 +39,10 @@ const FormAccountEdit = () => {
 		try {
 			setIsLoading({ name: true });
 			const request = await ApiClient.patch("/users", { name: user.name });
-			setRequisitionResult({
-				success: request.data.message,
-			});
+			request.status === 200 &&
+				setRequisitionResult({
+					success: request.data.message,
+				});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });
 		} finally {
@@ -46,10 +52,10 @@ const FormAccountEdit = () => {
 
 	const handleEditPassword = async () => {
 		setRequisitionResult(null);
-		if (user.password && user.password !== confirmPassword)
+		if (user.password !== confirmPassword)
 			return setRequisitionResult({
 				errors: {
-					confirmPassword: "senhas não conferem",
+					confirmPassword: PHRASE_PASSWORDS_DONT_MATCH,
 				},
 			});
 		try {
@@ -58,9 +64,10 @@ const FormAccountEdit = () => {
 				password: user.password,
 				old_password: user.old_password,
 			});
-			setRequisitionResult({
-				success: request.data.message,
-			});
+			request.status === 200 &&
+				setRequisitionResult({
+					success: request.data.message,
+				});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });
 		} finally {
@@ -87,7 +94,7 @@ const FormAccountEdit = () => {
 			<hr className="my-5" />
 			<AppStaticInput
 				{...oldPasswordEditInput}
-				validation={requisitionResult?.errors?.password ?? ""}
+				validation={requisitionResult?.errors?.old_password ?? ""}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
 					setUser({ ...user, old_password: e.target.value })
 				}

@@ -1,18 +1,14 @@
-import React from "react"
+import React from "react";
 
 const AppStaticSubmitOfferMissingFill = () => {
-  return (
-    <div className="items-center gap-x-3 border p-3 rounded">
-      <h3>preencha todos os campos para poder escolher sua imagem :)</h3>
-      <div className="flex gap-x-3 items-center">
-        <span className="text-yellow-200 text-lg">⚠</span>
-        <small className="text-white">
-          seu anúncio será enviado automaticamente após o envio da imagem, que
-          deve ter no máximo 1MB
-        </small>
-      </div>
-    </div>
-  )
-}
+	return (
+		<div>
+			<h5 className="p-5">um breve aviso.</h5>
+			<p className="border-red-500 border-2 p-5 w-auto rounded-md">
+				preencha todos os campos para poder escolher sua imagem, de até 1mb.
+			</p>
+		</div>
+	);
+};
 
-export default AppStaticSubmitOfferMissingFill
+export default AppStaticSubmitOfferMissingFill;

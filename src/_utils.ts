@@ -106,6 +106,14 @@ export function dateMask(date: any) {
 	return maskedDate
 }
 
+export function parseSubmitOfferErrorFields(reqResErr: any) {
+	return Object.values(
+		reqResErr?.errors
+	)
+		.map((err: any) => err.map((err: string) => err.split(" ")[2]))
+		.join(", ")
+}
+
 export function formatZipCode(zipCode: any) {
 	zipCode = zipCode.replace(/\D/g, "")
 	zipCode = zipCode.replace(/^(\d{5})(\d)/, "$1-$2")
