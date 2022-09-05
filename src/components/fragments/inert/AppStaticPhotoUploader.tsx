@@ -1,13 +1,13 @@
 //@ts-ignore
 //@ts-nocheck
 import React from "react";
-import SimpleFileUpload from "react-simple-file-upload";
+const SimpleFileUpload = require("react-simple-file-upload").default;
 
-const AppStaticPhotoUploader = ({
+export default function AppStaticPhotoUploader({
 	onSuccess,
 }: {
 	onSuccess: (url: string) => void;
-}) => {
+}) {
 	return (
 		<div className="flex bg-gray-800 justify-center border rounded-md p-2">
 			<SimpleFileUpload
@@ -20,6 +20,4 @@ const AppStaticPhotoUploader = ({
 			/>
 		</div>
 	);
-};
-
-export default AppStaticPhotoUploader;
+}

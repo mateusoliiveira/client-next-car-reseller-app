@@ -1,19 +1,15 @@
 import { Tabs } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import AppMutableUserProfilePage from "./AppMutableUserProfilePage";
 import AppMutableUserProfilePostedOffers from "./AppMutableUserProfilePostedOffers";
 import { User } from "../../../../src/interfaces/User";
 import { PostedOffer } from "../../../../src/interfaces/Offer";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppMutableUserProfileEdit from "./AppMutableUserProfileEdit";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-const AppMutableHeroAccount = ({
-	user,
-	offers,
-}: {
-	user: User;
-	offers: PostedOffer[];
-}) => {
+const AppMutableHeroAccount = ({ user }: { user?: User }) => {
 	return (
 		<div
 			className="lg:px-32 container md:justify-evenly m-auto mt-10 font-bold"
@@ -28,11 +24,6 @@ const AppMutableHeroAccount = ({
 				<Tabs.Item title="Editar minha conta">
 					<AppStaticTab>
 						<AppMutableUserProfileEdit user={user} />
-					</AppStaticTab>
-				</Tabs.Item>
-				<Tabs.Item title="Meus Anúncios (em breve)">
-					<AppStaticTab>
-						<AppMutableUserProfilePostedOffers offers={offers} />
 					</AppStaticTab>
 				</Tabs.Item>
 			</Tabs.Group>

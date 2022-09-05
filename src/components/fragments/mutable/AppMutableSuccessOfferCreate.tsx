@@ -1,22 +1,17 @@
 import React, { ReactElement } from "react";
 import AppMutableAlert from "./AppMutableAlert";
 
-const AppMutableSuccessOfferCreate = ({
-	cameAfterCreateOffer,
+const AppMutableSuccessOfferAction = ({
+	cameAfter,
 }: {
-	cameAfterCreateOffer: boolean;
+	cameAfter?: string;
 }): ReactElement => {
+	console.log(cameAfter);
 	return (
 		<div className="mt-10">
-			{cameAfterCreateOffer ? (
-				<AppMutableAlert
-					message={{ success: "Você criou um novo anúncio :) Boa sorte!" }}
-				/>
-			) : (
-				""
-			)}
+			{cameAfter ? <AppMutableAlert message={{ success: cameAfter }} /> : ""}
 		</div>
 	);
 };
 
-export default AppMutableSuccessOfferCreate;
+export default AppMutableSuccessOfferAction;

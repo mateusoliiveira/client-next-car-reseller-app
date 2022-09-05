@@ -11,15 +11,16 @@ const Account: NextPage<{ user: User }> = ({
 	user: User;
 }): ReactElement => {
 	const router = useRouter();
-	const [cameAfterCreateOffer, setCameAfterCreateOffer] =
-		useState<boolean>(false);
+	const [cameAfter, setCameAfter] = useState<{ [x: string]: string }>({
+		createOffer: "Publicado. Boa sorte!",
+		refreshedOffer: "Anúncio editado",
+	});
+	const [action, setAction] = useState<string>("");
 
 	useEffect(() => {
-		if (router.query.after) setCameAfterCreateOffer(true);
+		if (router.query.after) setAction(cameAfter[String(router.query.after)]);
 	}, []);
-	return (
-		<SectionAccount cameAfterCreateOffer={cameAfterCreateOffer} user={user} />
-	);
+	return <SectionAccount cameAfter={action} user={user} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async ({

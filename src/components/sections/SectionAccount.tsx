@@ -3,20 +3,19 @@ import { User } from "../../../src/interfaces/User";
 import AppStaticContainer from "../fragments/inert/AppStaticContainer";
 import AppMutableSuccessOfferCreate from "../fragments/mutable/AppMutableSuccessOfferCreate";
 import AppMutableHeroAccount from "../fragments/mutable/AppMutableHeroAccount";
+import { PostedOffer } from "../../interfaces/Offer";
 
 const SectionAccount = ({
-	cameAfterCreateOffer,
+	cameAfter,
 	user,
 }: {
-	cameAfterCreateOffer: boolean;
+	cameAfter?: string;
 	user: User;
 }) => {
 	return (
 		<AppStaticContainer>
-			<AppMutableSuccessOfferCreate
-				cameAfterCreateOffer={cameAfterCreateOffer}
-			/>
-			<AppMutableHeroAccount user={user} offers={[]} />
+			<AppMutableSuccessOfferCreate cameAfter={cameAfter} />
+			<AppMutableHeroAccount user={user} />
 		</AppStaticContainer>
 	);
 };

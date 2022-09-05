@@ -2,6 +2,13 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { formatToBRL, hideData, hideEmail } from "../../../../src/_utils";
+import {
+	IoMdPerson,
+	IoIosHeart,
+	IoMdSwap,
+	IoIosArrowRoundForward,
+} from "react-icons/io";
+import AppStaticLink from "../inert/AppStaticLink";
 
 const AppMutableUserProfilePage = ({ user }: any) => {
 	return (
@@ -41,18 +48,7 @@ const AppMutableUserProfilePage = ({ user }: any) => {
 					<div className="flex-grow">
 						<div className="flex items-center gap-3">
 							<div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-								<svg
-									fill="none"
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									className="w-6 h-6"
-									viewBox="0 0 24 24"
-								>
-									<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-									<circle cx="12" cy="7" r="4"></circle>
-								</svg>
+								<IoMdPerson />
 							</div>
 							<h2 className="lg:text-gray-200 text-lg title-font font-bold mb-3">
 								minhas informações
@@ -86,38 +82,35 @@ const AppMutableUserProfilePage = ({ user }: any) => {
 					<div className="flex-grow">
 						<div className="flex items-center gap-3">
 							<div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-								<svg
-									fill="none"
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									className="w-6 h-6"
-									viewBox="0 0 24 24"
-								>
-									<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-								</svg>
+								<IoMdSwap />
+							</div>
+							<h2 className="lg:text-gray-200 text-lg title-font font-bold mb-3">
+								meus anúncios
+							</h2>
+						</div>
+						<p className="leading-relaxed text-base">
+							todos os seus anúncios postados
+						</p>
+						<a className="mt-3 text-indigo-500 inline-flex items-center">
+							<AppStaticLink href="/conta/anunciados" title="ver todos" />
+						</a>
+					</div>
+				</div>
+				<div className="flex flex-col mb-10 lg:items-start items-center">
+					<div className="flex-grow">
+						<div className="flex items-center gap-3">
+							<div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
+								<IoIosHeart />
 							</div>
 							<h2 className="lg:text-gray-200 text-lg title-font font-bold mb-3">
 								favoritos
 							</h2>
 						</div>
 						<p className="leading-relaxed text-base">
-							{"você favoritou X autos (em breve)"}
+							você favoritou X autos (em breve)
 						</p>
 						<a className="mt-3 text-indigo-500 inline-flex items-center">
-							ver todos
-							<svg
-								fill="none"
-								stroke="currentColor"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								className="w-4 h-4 ml-2"
-								viewBox="0 0 24 24"
-							>
-								<path d="M5 12h14M12 5l7 7-7 7"></path>
-							</svg>
+							<AppStaticLink href="/conta/anunciados" title="ver todos" />
 						</a>
 					</div>
 				</div>

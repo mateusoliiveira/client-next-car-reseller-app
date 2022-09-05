@@ -17,7 +17,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 		"Cache-Control",
 		"public, s-maxage=360, stale-while-revalidate=3600"
 	);
-	console.log(token);
 	if (!brands || !categories) {
 		return { notFound: true };
 	}

@@ -50,7 +50,7 @@ const AppMutableAlert = ({ message, status = 200 }: RequisitionResult) => {
 									status
 								)}`}
 							>
-								{String(message)}
+								{String(message.success)}
 							</div>
 							<Toast.Toggle />
 						</Toast>
