@@ -41,7 +41,7 @@ const FormAccountEdit = () => {
 			const request = await ApiClient.patch("/users", { name: user.name });
 			request.status === 200 &&
 				setRequisitionResult({
-					success: request.data.message,
+					success: request.data,
 				});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });
@@ -66,7 +66,7 @@ const FormAccountEdit = () => {
 			});
 			request.status === 200 &&
 				setRequisitionResult({
-					success: request.data.message,
+					success: request.data,
 				});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });

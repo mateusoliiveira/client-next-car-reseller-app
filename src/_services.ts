@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { clientURLApi, serverURLApi } from "./config/api";
+import { clientURLApi, serverURLApi } from "./config/apiDEV";
 
 export const ApiServer: AxiosInstance = axios.create({
 	baseURL: serverURLApi,

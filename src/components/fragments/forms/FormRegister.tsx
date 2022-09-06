@@ -49,7 +49,7 @@ const FormRegister = () => {
 			setIsLoading(true);
 			const request = await ApiClient.post("/guests/register", user);
 			setRequisitionResult({
-				success: request.data.message,
+				success: request.data,
 			});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });

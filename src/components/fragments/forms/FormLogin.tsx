@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import AppMutableAlert from "../mutable/AppMutableAlert";
 import { useRouter } from "next/router";
 import AppStaticInput from "../inert/AppStaticInput";
 import {
@@ -43,7 +42,6 @@ const FormLogin = () => {
 
 	return (
 		<AppStaticForm>
-			<AppMutableAlert message={requisitionResult?.success} />
 			<AppStaticInput
 				{...emailLoginInput}
 				validation={requisitionResult?.errors?.email ?? ""}
