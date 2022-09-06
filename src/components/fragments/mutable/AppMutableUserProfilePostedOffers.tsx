@@ -33,7 +33,7 @@ const AppMutableUserProfilePostedOffers = ({
 					</div>
 				</div>
 				<div className="flex flex-wrap -m-4">
-					{offers.map((offer: PostedOffer, index: number) => {
+					{offers?.map((offer: PostedOffer, index: number) => {
 						return (
 							<div className="p-4 lg:w-1/2" key={index}>
 								<div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
@@ -59,9 +59,9 @@ const AppMutableUserProfilePostedOffers = ({
 											{formatToBRL(offer.price)}
 										</p>
 										<span className="inline-flex  text-2xl gap-3">
-											<Link href={`/oferta/${offer.id}`}>
+											<span href={`/oferta/${offer.id}`}>
 												<TiDelete className="text-red-400 hover:text-red-600 cursor-pointer" />
-											</Link>
+											</span>
 											<Link href={`/conta/anunciados/${offer.id}/editar`}>
 												<TiEdit className="text-yellow-300 hover:text-yellow-400 cursor-pointer" />
 											</Link>
