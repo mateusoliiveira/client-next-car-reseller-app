@@ -19,6 +19,18 @@ export default async function handler(
 		}
 	}
 
+	if (req.method == 'DELETE') {
+		const { token }: any = await getToken({ req })
+		try {
+			const { data } = await ApiServer.delete(`/offers/${req.query.id}`, {
+				headers: { Authorization: 'Bearer ' + token }
+			})
+			res.status(200).json(data)
+		} catch (error: any) {
+			res.status(error.response.status).json(error.response.data)
+		}
+	}
+
 	try {
 		const { data } = await ApiServer.get(`/offers/${req.query.id}`)
 		res.status(200).json(data)
