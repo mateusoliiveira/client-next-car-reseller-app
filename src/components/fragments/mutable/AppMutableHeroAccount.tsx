@@ -5,7 +5,7 @@ import { IUserData } from "../../../../src/interfaces/User";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppMutableUserProfileEdit from "./AppMutableUserProfileEdit";
 
-const AppMutableHeroAccount = ({ user }: { user?: IUserData }) => {
+const AppMutableHeroAccount = ({ user }: { user: IUserData }) => {
 	return (
 		<div
 			className="lg:px-32 container md:justify-evenly m-auto mt-10 font-bold"
@@ -19,7 +19,7 @@ const AppMutableHeroAccount = ({ user }: { user?: IUserData }) => {
 				</Tabs.Item>
 				<Tabs.Item title="Editar minha conta">
 					<AppStaticTab>
-						<AppMutableUserProfileEdit user={user} />
+						<AppMutableUserProfileEdit />
 					</AppStaticTab>
 				</Tabs.Item>
 			</Tabs.Group>

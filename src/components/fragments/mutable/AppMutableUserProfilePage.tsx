@@ -1,15 +1,14 @@
 import { signOut } from "next-auth/react";
-import Link from "next/link";
 import React from "react";
-import { formatToBRL, hideData, hideEmail } from "../../../../src/_utils";
+import { hideData, hideEmail } from "../../../../src/_utils";
 import { IoMdPerson, IoIosHeart, IoMdSwap } from "react-icons/io";
 import AppStaticLink from "../inert/AppStaticLink";
 import { IUserData } from "../../../interfaces/User";
 
-const AppMutableUserProfilePage = ({ user }: IUserData) => {
+const AppMutableUserProfilePage = ({ user }: { user: IUserData }) => {
 	return (
 		<div className="col lg:flex">
-			<div className="hidden">
+			{/* <div className="hidden">
 				{Array.isArray(user.offers) && user.offers?.length > 0 ? (
 					<Link href={`/oferta/${user.offers.at(-1).id}`}>
 						<div className="lg:w-1/2 bg-white p-3 rounded-md">
@@ -37,7 +36,7 @@ const AppMutableUserProfilePage = ({ user }: IUserData) => {
 						</p>
 					</Link>
 				)}
-			</div>
+			</div> */}
 
 			<div className="flex flex-col lg:py-3 -mb-10 lg:pl-12 pl-5 pt-10 rounded-md my-3 lg:text-left bg-white w-full lg:bg-transparent lg:w-1/2 items-start">
 				<div className="flex flex-col mb-10 lg:items-start items-center">

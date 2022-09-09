@@ -8,7 +8,11 @@ const AppMutableSuccessOfferAction = ({
 }): ReactElement => {
 	return (
 		<div className="mt-10">
-			{cameAfter ? <AppMutableAlert message={{ success: cameAfter }} /> : ""}
+			{cameAfter ? (
+				<AppMutableAlert message={{ success: { cameAfter } }} />
+			) : (
+				""
+			)}
 		</div>
 	);
 };
