@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 import React, { ChangeEvent, useState, ReactElement, useRef } from "react";
 import { ApiClient } from "../../../_services";
-import { Brand } from "../../../interfaces/Brand";
+import { IBrandData } from "../../../interfaces/Brand";
 import { Category } from "../../../interfaces/Category";
-import { Offer, PostedOffer } from "../../../interfaces/Offer";
+import { IOfferData, Offer, PostedOffer } from "../../../interfaces/Offer";
 import { Vehicle } from "../../../interfaces/Vehicle";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppStaticInput from "../inert/AppStaticInput";
@@ -34,6 +34,7 @@ import {
 	parseSubmitOfferErrorFields,
 } from "../../../_utils";
 import Image from "next/image";
+import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
 
 type Steps = {
 	first: JSX.Element;
@@ -45,29 +46,23 @@ type Stp = keyof Steps;
 
 const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 	const navigate = useRouter();
-	const [requisitionResult, setRequisitionResult] = useState<{
-		errors?: {
-			[x: string]: string | string[];
-		};
-		success?: {
-			[x: string]: string | string[];
-		};
-	} | null>(null);
+	const [requisitionResult, setRequisitionResult] =
+		useState<IRequisitionResult | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [brandsList, setBrandsList] = useState<Brand[]>(
+	const [brandsList, setBrandsList] = useState<IBrandData[]>(
 		brands.filter(
-			(b: any) =>
+			(b: IBrandData) =>
 				b.name === "BMW" || b.name === "Mercedes" || b.name === "Volkswagen"
 		)
 	);
 	const [vehiclesList, setVehiclesList] = useState<any[]>(
-		brands.find((b: Brand) => b.id === offer.brand_id).vehicles
+		brands.find((b: IBrandData) => b.id === offer.brand_id).vehicles
 	);
 	const [keywordBrand, setKeywordBrand] = useState<string>("");
 	const [keywordVehicle, setKeywordVehicle] = useState<string>("");
 	const [actualStep, setActualStep] = useState<Stp>("first");
 	const [pictureUrl, setPictureUrl] = useState<string>(offer.picture);
-	const [actualOffer, setActualOffer] = useState<PostedOffer>(offer);
+	const [actualOffer, setActualOffer] = useState<IOfferData>(offer);
 
 	const handleEdit = async () => {
 		setRequisitionResult(null);
@@ -153,7 +148,7 @@ const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{brandsList &&
 														brandsFiltered(keywordBrand, brandsList)?.map(
-															(brand: Brand) => {
+															(brand: IBrandData) => {
 																return (
 																	<div
 																		className={`${

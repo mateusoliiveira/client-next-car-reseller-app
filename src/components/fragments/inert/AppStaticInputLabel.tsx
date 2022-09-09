@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 const AppStaticInputLabel = ({
 	id,
@@ -6,7 +6,7 @@ const AppStaticInputLabel = ({
 }: {
 	id?: string;
 	title?: string;
-}) => {
+}): ReactElement => {
 	return (
 		<label htmlFor={id} className="text-red-500 font-extrabold">
 			{title}

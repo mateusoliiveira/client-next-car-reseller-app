@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
-import { ComponentChildren } from "../../../interfaces/ComponentChildren";
+import { IComponentChildren } from "../../../interfaces/Pages";
 import AppStaticFooter from "./AppStaticFooter";
 import AppStaticMain from "./AppStaticMain";
 import AppStaticNavbar from "./AppStaticNavbar";
 
-const AppStaticContainer = ({ children }: ComponentChildren): ReactElement => {
+const AppStaticContainer = ({ children }: IComponentChildren): ReactElement => {
 	return (
 		<AppStaticMain>
 			<AppStaticNavbar />

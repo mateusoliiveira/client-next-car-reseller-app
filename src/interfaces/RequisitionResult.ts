@@ -1,6 +1,8 @@
-export interface RequisitionResult {
-	message?: {
+export interface IRequisitionResult {
+	errors?: {
 		[x: string]: string | string[];
-	}
-	status?: number;
+	};
+	success?: {
+		[x: string]: string | string[];
+	};
 };

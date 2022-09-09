@@ -1,13 +1,9 @@
 import { GetServerSideProps, NextPage } from "next";
 import { ApiClient } from "../../../../src/_services";
 import SectionOffer from "../../../components/sections/SectionOffer";
-import { PostedOffer } from "../../../../src/interfaces/Offer";
+import { IPageOfferAttributes } from "../../../interfaces/Pages";
 
-const OfferPage: NextPage<{ offer: PostedOffer }> = ({
-	offer,
-}: {
-	offer: PostedOffer;
-}) => {
+const OfferPage: NextPage<IPageOfferAttributes> = ({ offer }) => {
 	return <SectionOffer offer={offer} />;
 };
 

@@ -9,20 +9,15 @@ import {
 } from "./FormLoginComponents";
 import AppStaticForm from "../inert/AppStaticForm";
 import AppStaticButton from "../inert/AppStaticButton";
-import { Credential } from "../../../interfaces/Credential";
+import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
+import { IUserLogin } from "../../../interfaces/User";
 
 const FormLogin = () => {
 	const router = useRouter();
-	const [requisitionResult, setRequisitionResult] = useState<{
-		errors?: {
-			[x: string]: string | string[];
-		};
-		success?: {
-			[x: string]: string | string[];
-		};
-	} | null>(null);
+	const [requisitionResult, setRequisitionResult] =
+		useState<IRequisitionResult | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [user, setUser] = useState<Credential>({
+	const [user, setUser] = useState<IUserLogin>({
 		email: "",
 		password: "",
 	});

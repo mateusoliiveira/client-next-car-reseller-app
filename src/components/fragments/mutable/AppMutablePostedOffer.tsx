@@ -1,8 +1,8 @@
 import { Badge, Button } from "flowbite-react";
-import { PostedOffer } from "../../../../src/interfaces/Offer";
+import { IOfferData } from "../../../../src/interfaces/Offer";
 import { formatDate, formatToBRL, formatZipCode } from "../../../../src/_utils";
 
-const AppMutablePostedOffer = ({ offer }: { offer: PostedOffer }) => {
+const AppMutablePostedOffer = ({ offer }: { offer: IOfferData }) => {
 	return (
 		<section className="text-gray-600 body-font overflow-hidden">
 			<div className="container px-5 py-24 mx-auto">

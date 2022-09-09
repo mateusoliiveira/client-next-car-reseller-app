@@ -12,22 +12,13 @@ import {
 	newPasswordConfirmationEditInput,
 } from "./FormAccountEditComponents";
 import { ApiClient } from "../../../_services";
-import {
-	PHRASE_GENERIC_CHANGE,
-	PHRASE_NEW_PASSWORD,
-	PHRASE_PASSWORDS_DONT_MATCH,
-} from "../../../config/constants";
+import { PHRASE_PASSWORDS_DONT_MATCH } from "../../../config/constants";
+import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
 
 const FormAccountEdit = () => {
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
-	const [requisitionResult, setRequisitionResult] = useState<{
-		errors?: {
-			[x: string]: string | string[];
-		};
-		success?: {
-			[x: string]: string | string[];
-		};
-	} | null>(null);
+	const [requisitionResult, setRequisitionResult] =
+		useState<IRequisitionResult | null>(null);
 	const [isLoading, setIsLoading] = useState<{ [x: string]: boolean }>({
 		name: false,
 		password: false,

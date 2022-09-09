@@ -1,7 +1,7 @@
 import React from "react";
 import FormAccountEdit from "../forms/FormAccountEdit";
 
-const AppMutableUserProfileEdit = ({ user }: any) => {
+const AppMutableUserProfileEdit = () => {
 	return (
 		<div className="col">
 			<div className="flex flex-col lg:py-3 -mb-10 lg:pl-12 pl-5 pt-10 rounded-md my-3 lg:text-left bg-white w-full lg:bg-transparent lg:w-1/2 items-start">

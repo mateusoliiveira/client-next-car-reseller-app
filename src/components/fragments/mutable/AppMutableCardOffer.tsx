@@ -1,13 +1,13 @@
 import { Badge, Card } from "flowbite-react";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import { PostedOffer } from "../../../../src/interfaces/Offer";
+import { IOfferData } from "../../../../src/interfaces/Offer";
 import { formatToBRL } from "../../../../src/_utils";
 
 const AppMutableCardOffer = ({
 	offer,
 }: {
-	offer: PostedOffer;
+	offer: IOfferData;
 }): ReactElement => {
 	return (
 		<Link href={`/oferta/${offer.id}`}>

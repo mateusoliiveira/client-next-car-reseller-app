@@ -10,7 +10,6 @@ import {
 } from "./FormLoginComponents";
 import AppStaticForm from "../inert/AppStaticForm";
 import AppStaticButton from "../inert/AppStaticButton";
-import { NewCredential } from "../../../interfaces/Credential";
 import {
 	emailRegisterInput,
 	nameRegisterInput,
@@ -18,20 +17,16 @@ import {
 	passwordRegisterInput,
 } from "./FormRegisterComponents";
 import { ApiClient } from "../../../_services";
+import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
+import { IUserRegister } from "../../../interfaces/User";
 
 const FormRegister = () => {
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
-	const [requisitionResult, setRequisitionResult] = useState<{
-		errors?: {
-			[x: string]: string | string[];
-		};
-		success?: {
-			[x: string]: string | string[];
-		};
-	} | null>(null);
+	const [requisitionResult, setRequisitionResult] =
+		useState<IRequisitionResult | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [errors, setErrors] = useState<null>();
-	const [user, setUser] = useState<NewCredential>({
+	const [user, setUser] = useState<IUserRegister>({
 		email: "",
 		name: "",
 		password: "",
@@ -49,7 +44,7 @@ const FormRegister = () => {
 			setIsLoading(true);
 			const request = await ApiClient.post("/guests/register", user);
 			setRequisitionResult({
-				success: request.data,
+				success: request.data.message,
 			});
 		} catch (error: any) {
 			setRequisitionResult({ errors: error.response.data.errors });

@@ -1,12 +1,6 @@
 import React, { ReactElement } from "react";
-import { Offer } from "../../../../src/interfaces/Offer";
-
-type StepsAlreadyDone = {
-	greenIfBrandModelCategoryIsFilled: string;
-	greenIfTitleDescriptionPriceIsFilled: string;
-	greenIfContactZipCodeIsFilled: string;
-};
-type StpAlreadyDone = keyof StepsAlreadyDone;
+import { IOfferData } from "../../../../src/interfaces/Offer";
+import { StepsOfferDone } from "../../../interfaces/Sections";
 
 const AppStaticSubmitOfferPath = ({
 	stepToCheck,
@@ -16,8 +10,8 @@ const AppStaticSubmitOfferPath = ({
 	last = false,
 	nextStep,
 }: {
-	stepToCheck: StpAlreadyDone;
-	offer: Offer;
+	stepToCheck: StepsOfferDone;
+	offer: IOfferData;
 	info: {
 		header: string;
 		description: string;
@@ -26,7 +20,7 @@ const AppStaticSubmitOfferPath = ({
 	last?: boolean;
 	nextStep: () => void;
 }): ReactElement => {
-	const handleStepAlreadyDone = (stepToCheck: StpAlreadyDone) => {
+	const handleStepAlreadyDone = (stepToCheck: StepsOfferDone) => {
 		const checkFill = (inputs: unknown[]): string => {
 			return inputs.every((input) => input) ? "bg-green-400" : "bg-gray-200";
 		};

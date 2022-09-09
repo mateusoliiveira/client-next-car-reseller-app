@@ -1,13 +1,11 @@
 import { GetServerSideProps, NextPage } from "next";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement } from "react";
 import { ApiClient } from "../../../../src/_services";
-import { PostedOffer } from "../../../interfaces/Offer";
 import SectionAccountOffers from "../../../components/sections/SectionAccountOffers";
+import { IPageAccountOffersAttributes } from "../../../interfaces/Pages";
 
-const AccountOffers: NextPage<{ offers: PostedOffer[] }> = ({
+const AccountOffers: NextPage<IPageAccountOffersAttributes> = ({
 	offers,
-}: {
-	offers: PostedOffer[];
 }): ReactElement => {
 	return <SectionAccountOffers offers={offers} />;
 };

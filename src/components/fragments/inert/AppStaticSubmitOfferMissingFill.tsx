@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
-const AppStaticSubmitOfferMissingFill = () => {
+const AppStaticSubmitOfferMissingFill = (): ReactElement => {
 	return (
 		<div>
 			<h5 className="p-5">um breve aviso.</h5>

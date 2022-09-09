@@ -1,12 +1,12 @@
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import SectionSearchOffersByVehicle from "../../../components/sections/SectionSearchOffersByVehicle";
-import { SearchOffer } from "../../../../src/interfaces/SearchOffer";
 import { ApiClient } from "../../../../src/_services";
+import { IPageSearchOffersAttributes } from "../../../interfaces/Pages";
 
-const SearchVehicle: NextPage<SearchOffer> = ({
+const SearchVehicle: NextPage<IPageSearchOffersAttributes> = ({
 	query,
 	offers,
-}: SearchOffer) => {
+}) => {
 	return <SectionSearchOffersByVehicle query={query} offers={offers} />;
 };
 

@@ -2,14 +2,10 @@ import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { ReactElement, useEffect, useState } from "react";
 import SectionAccount from "../../components/sections/SectionAccount";
-import { User } from "../../../src/interfaces/User";
 import { ApiClient } from "../../../src/_services";
+import { IPageAccountAttributes } from "../../interfaces/Pages";
 
-const Account: NextPage<{ user: User }> = ({
-	user,
-}: {
-	user: User;
-}): ReactElement => {
+const Account: NextPage<IPageAccountAttributes> = ({ user }): ReactElement => {
 	const router = useRouter();
 	const [cameAfter, setCameAfter] = useState<{ [x: string]: string }>({
 		createOffer: "Publicado. Boa sorte!",

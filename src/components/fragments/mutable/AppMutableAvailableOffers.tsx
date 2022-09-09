@@ -2,32 +2,32 @@ import { Accordion, Select, TextInput } from "flowbite-react";
 import React, { ChangeEvent, ReactElement, useEffect, useState } from "react";
 import AppMutablePostedOffer from "./AppMutableCardOffer";
 import AppStaticScrollCars from "../inert/AppStaticScrollCars";
-import { PostedOffer } from "../../../interfaces/Offer";
-import { SearchOffer } from "../../../interfaces/SearchOffer";
+import { IOfferData } from "../../../interfaces/Offer";
 import { cleanFilters, handleCleanFilter } from "../../../_utils";
+import { ISectionSearchOfferAttributes } from "../../../interfaces/Sections";
 
 const AppMutableAvailableOffers = ({
 	query,
 	offers,
-}: SearchOffer): ReactElement => {
+}: ISectionSearchOfferAttributes): ReactElement => {
 	const [availableOffersList, setAvailableOffersList] =
-		useState<PostedOffer[]>(offers);
+		useState<IOfferData[]>(offers);
 	const [filters, setFilters] = useState<any>({ ...cleanFilters() });
 
 	console.log(filters);
 
 	const allOrFiltered = () => {
-		let toFilter: PostedOffer[] = availableOffersList;
+		let toFilter: IOfferData[] = availableOffersList;
 
 		if (filters.name && filters.name.trim() !== "") {
-			toFilter = toFilter.filter((offer: PostedOffer) =>
+			toFilter = toFilter.filter((offer: IOfferData) =>
 				offer.vehicles.name.toLowerCase().includes(filters.name.toLowerCase())
 			);
 		}
 
 		if (filters.year_start <= filters.year_end) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					Number(offer.vehicles.year) >= Number(filters.year_start) &&
 					Number(offer.vehicles.year) <= Number(filters.year_end)
 			);
@@ -35,7 +35,7 @@ const AppMutableAvailableOffers = ({
 
 		if (filters.price_start <= filters.price_end) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					parseFloat(offer.price) >= parseFloat(filters.price_start) &&
 					parseFloat(offer.price) <= parseFloat(filters.price_end)
 			);
@@ -43,7 +43,7 @@ const AppMutableAvailableOffers = ({
 
 		if (filters.cylinders && parseInt(filters.cylinders) > 0) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					parseInt(String(offer.vehicles.cylinders)) ===
 					parseInt(filters.cylinders)
 			);
@@ -51,27 +51,27 @@ const AppMutableAvailableOffers = ({
 
 		if (filters.liters && parseFloat(filters.liters) > 0) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					parseFloat(offer.vehicles.liters) === parseFloat(filters.liters)
 			);
 		}
 
 		if (filters.doors && Number(filters.doors) > 0) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					Number(offer.vehicles.doors) === Number(filters.doors)
 			);
 		}
 
 		if (filters.horsepower && Number(filters.horsepower) > 0) {
 			toFilter = toFilter.filter(
-				(offer: PostedOffer) =>
+				(offer: IOfferData) =>
 					Number(offer.vehicles.horsepower) > Number(filters.horsepower)
 			);
 		}
 
 		if (filters.is_automatic) {
-			toFilter = toFilter.filter((offer: PostedOffer) => {
+			toFilter = toFilter.filter((offer: IOfferData) => {
 				if (filters.is_automatic === 1) return !offer.vehicles.is_automatic;
 				if (filters.is_automatic === 2) return offer.vehicles.is_automatic;
 			});
@@ -264,7 +264,7 @@ const AppMutableAvailableOffers = ({
 			</div>
 			<AppStaticScrollCars>
 				{(availableOffersList.length > 0 &&
-					allOrFiltered().map((offer: PostedOffer) => {
+					allOrFiltered().map((offer: IOfferData) => {
 						return (
 							<AppMutablePostedOffer key={offer.vehicles.id} offer={offer} />
 						);

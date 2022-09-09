@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { ReactElement, useState } from "react";
 import { IoMdSwap } from "react-icons/io";
 import { BsTrash } from "react-icons/bs";
-import { PostedOffer } from "../../../../src/interfaces/Offer";
+import { IOfferData } from "../../../../src/interfaces/Offer";
 import { formatToBRL } from "../../../_utils";
 import AppStaticLink from "../inert/AppStaticLink";
 import { TiDelete, TiEdit } from "react-icons/ti";
@@ -13,9 +13,9 @@ import { Spinner } from "flowbite-react";
 const AppMutableUserProfilePostedOffers = ({
 	offers,
 }: {
-	offers: PostedOffer[];
+	offers: IOfferData[];
 }): ReactElement => {
-	const [actualOffers, setActualOffers] = useState<PostedOffer[]>(offers);
+	const [actualOffers, setActualOffers] = useState<IOfferData[]>(offers);
 	const [areYouSure, setAreYouSure] = useState<{
 		isLoading: boolean;
 		id: string;
@@ -28,7 +28,7 @@ const AppMutableUserProfilePostedOffers = ({
 		try {
 			setAreYouSure({ id, isLoading: true });
 			await ApiClient.delete("/offers/" + id);
-			setActualOffers([...offers.filter((o: PostedOffer) => o.id !== id)]);
+			setActualOffers([...offers.filter((o: IOfferData) => o.id !== id)]);
 		} catch (error: any) {
 			alert("tente novamente mais tarde");
 		} finally {
@@ -61,7 +61,7 @@ const AppMutableUserProfilePostedOffers = ({
 					</div>
 				</div>
 				<div className="flex flex-wrap -m-4">
-					{actualOffers?.map((offer: PostedOffer, index: number) => {
+					{actualOffers?.map((offer: IOfferData, index: number) => {
 						return (
 							<div className="p-4 lg:w-1/2" key={index}>
 								<div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">

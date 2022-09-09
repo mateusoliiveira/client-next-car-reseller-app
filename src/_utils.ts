@@ -1,6 +1,6 @@
-import { Brand } from "./interfaces/Brand";
-import { Offer } from "./interfaces/Offer";
-import { Vehicle } from "./interfaces/Vehicle";
+import { IBrand } from "./interfaces/Brand";
+import { IOffer } from "./interfaces/Offer";
+import { IVehicleData } from "./interfaces/Vehicle";
 
 export const handleCleanFilter = (value: any) => value ?? undefined
 
@@ -19,7 +19,7 @@ export const cleanFilters = () => {
 	}
 }
 
-export const cleanOffer = () => {
+export const cleanOffer = (): IOffer => {
 	return {
 		brand_id: "",
 		category_id: "",
@@ -33,24 +33,24 @@ export const cleanOffer = () => {
 	}
 }
 
-export const checkIfAreAllFilled = (offerToCheck: Offer): boolean => {
+export const checkIfAreAllFilled = (offerToCheck: IOffer): boolean => {
 	const { picture, ...offerObject } = offerToCheck;
 	return Object.values(offerObject).every((v) => v);
 };
 
 
-export const brandsFiltered = (keywordBrand: string, brandsList: Brand[]): Brand[] => {
+export const brandsFiltered = (keywordBrand: string, brandsList: IBrand[]): IBrand[] => {
 	if (keywordBrand.trim() !== "") {
-		return brandsList.filter((brand: Brand) =>
+		return brandsList.filter((brand: IBrand) =>
 			brand.name.toLowerCase().includes(keywordBrand.toLowerCase())
 		);
 	}
 	return brandsList;
 };
 
-export const carsFiltered = (keywordVehicle: string, vehiclesList: Vehicle[]): Vehicle[] => {
+export const carsFiltered = (keywordVehicle: string, vehiclesList: IVehicleData[]): IVehicleData[] => {
 	if (keywordVehicle.trim() !== "") {
-		return vehiclesList.filter((vehicle: Vehicle) =>
+		return vehiclesList.filter((vehicle: IVehicleData) =>
 			vehicle.name.toLowerCase().includes(keywordVehicle.toLowerCase())
 		);
 	}

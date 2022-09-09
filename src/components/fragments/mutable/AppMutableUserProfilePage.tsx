@@ -2,15 +2,11 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { formatToBRL, hideData, hideEmail } from "../../../../src/_utils";
-import {
-	IoMdPerson,
-	IoIosHeart,
-	IoMdSwap,
-	IoIosArrowRoundForward,
-} from "react-icons/io";
+import { IoMdPerson, IoIosHeart, IoMdSwap } from "react-icons/io";
 import AppStaticLink from "../inert/AppStaticLink";
+import { IUserData } from "../../../interfaces/User";
 
-const AppMutableUserProfilePage = ({ user }: any) => {
+const AppMutableUserProfilePage = ({ user }: IUserData) => {
 	return (
 		<div className="col lg:flex">
 			<div className="hidden">

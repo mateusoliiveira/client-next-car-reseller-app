@@ -1,12 +1,12 @@
 import React, { ReactElement } from "react";
-import { SearchOffer } from "../../../src/interfaces/SearchOffer";
 import AppMutableAvailableOffers from "../fragments/mutable/AppMutableAvailableOffers";
 import AppStaticContainer from "../fragments/inert/AppStaticContainer";
+import { ISectionSearchOfferAttributes } from "../../interfaces/Sections";
 
 const SectionSearchOffersByBrand = ({
 	query,
 	offers,
-}: SearchOffer): ReactElement => {
+}: ISectionSearchOfferAttributes): ReactElement => {
 	return (
 		<AppStaticContainer>
 			<AppMutableAvailableOffers query={query} offers={offers} />

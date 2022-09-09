@@ -2,8 +2,13 @@ import { GetServerSideProps, NextPage } from "next";
 import { getToken } from "next-auth/jwt";
 import SectionNewOffer from "../../../components/sections/SectionNewOffer";
 import { ApiClient } from "../../../../src/_services";
+import { IPageNewOfferAttributes } from "../../../interfaces/Pages";
 
-const OfferNew: NextPage = ({ brands, categories, token }: any) => {
+const OfferNew: NextPage<IPageNewOfferAttributes> = ({
+	brands,
+	categories,
+	token,
+}) => {
 	return (
 		<SectionNewOffer brands={brands} categories={categories} token={token} />
 	);

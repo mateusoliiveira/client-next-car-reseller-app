@@ -1,5 +1,5 @@
 import React from "react";
-import { EditOfferAttributes } from "../../interfaces/NewOfferAttributes";
+import { ISectionEditOfferAttributes } from "../../interfaces/Sections";
 import FormEditOffer from "../fragments/forms/FormEditOffer";
 import AppStaticContainer from "../fragments/inert/AppStaticContainer";
 
@@ -8,7 +8,7 @@ const SectionEditOffer = ({
 	categories,
 	token,
 	offer,
-}: EditOfferAttributes) => {
+}: ISectionEditOfferAttributes) => {
 	return (
 		<AppStaticContainer>
 			<FormEditOffer

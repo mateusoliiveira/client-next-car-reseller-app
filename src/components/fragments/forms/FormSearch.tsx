@@ -7,15 +7,15 @@ import React, {
 	KeyboardEvent,
 	useState,
 } from "react";
-import { Brand } from "../../../interfaces/Brand";
+import { IBrandData } from "../../../interfaces/Brand";
 import AppStaticInput from "../inert/AppStaticInput";
 import AppStaticLink from "../inert/AppStaticLink";
 import { findInput, findLink } from "./FormSearchComponents";
 
 const FormSearch = (props: any) => {
-	const [brandsList, setBrandsList] = useState<Brand[]>(
+	const [brandsList, setBrandsList] = useState<IBrandData[]>(
 		props.brands.filter(
-			(b: any) =>
+			(b: IBrandData) =>
 				b.name === "BMW" || b.name === "Mercedes" || b.name === "Volkswagen"
 		)
 	);
@@ -71,12 +71,7 @@ const FormSearch = (props: any) => {
 									checkWhitespace(e)
 								}
 								onChange={(e: ChangeEvent<HTMLInputElement>) =>
-									setKeywordModel(
-										`${
-											e.target.value.split(e.target.value[1])[0].toUpperCase() +
-											e.target.value.slice(1)
-										}`
-									)
+									setKeywordModel(e.target.value)
 								}
 							/>
 							<AppStaticLink
@@ -107,7 +102,7 @@ const FormSearch = (props: any) => {
 
 								<div className="h-30 overflow-auto">
 									{brandsList &&
-										allOrFiltered().map((brand: Brand) => {
+										allOrFiltered().map((brand: IBrandData) => {
 											return (
 												<Link
 													key={brand.id}

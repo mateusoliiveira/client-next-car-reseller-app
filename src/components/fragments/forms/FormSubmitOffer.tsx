@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 import React, { ChangeEvent, useState, ReactElement } from "react";
 import { ApiClient } from "../../../_services";
-import { Brand } from "../../../interfaces/Brand";
-import { Category } from "../../../interfaces/Category";
-import { Offer } from "../../../interfaces/Offer";
-import { Vehicle } from "../../../interfaces/Vehicle";
-import AppMutableAlert from "../mutable/AppMutableAlert";
+import { IBrandData } from "../../../interfaces/Brand";
+import { ICategoryData } from "../../../interfaces/Category";
+import { IOffer } from "../../../interfaces/Offer";
+import { IVehicleData } from "../../../interfaces/Vehicle";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppStaticInput from "../inert/AppStaticInput";
 import {
@@ -35,38 +34,26 @@ import {
 	formatToBRL,
 	parseSubmitOfferErrorFields,
 } from "../../../_utils";
-
-type Steps = {
-	first: JSX.Element;
-	second: JSX.Element;
-	third: JSX.Element;
-	fourth: JSX.Element;
-};
-type Stp = keyof Steps;
+import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
+import { StepsOffer } from "../../../interfaces/Sections";
 
 const FormSubmitOffer = ({ categories, brands, token }: any) => {
 	const navigate = useRouter();
-	const [requisitionResult, setRequisitionResult] = useState<{
-		errors?: {
-			[x: string]: string | string[];
-		};
-		success?: {
-			[x: string]: string | string[];
-		};
-	} | null>(null);
+	const [requisitionResult, setRequisitionResult] =
+		useState<IRequisitionResult | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [brandsList, setBrandsList] = useState<Brand[]>(
+	const [brandsList, setBrandsList] = useState<IBrandData[]>(
 		brands.filter(
-			(b: any) =>
+			(b: IBrandData) =>
 				b.name === "BMW" || b.name === "Mercedes" || b.name === "Volkswagen"
 		)
 	);
 	const [vehiclesList, setVehiclesList] = useState<any[]>([]);
 	const [keywordBrand, setKeywordBrand] = useState<string>("");
 	const [keywordVehicle, setKeywordVehicle] = useState<string>("");
-	const [actualStep, setActualStep] = useState<Stp>("first");
+	const [actualStep, setActualStep] = useState<StepsOffer>("first");
 	const [pictureUrl, setPictureUrl] = useState<string>("");
-	const [offer, setOffer] = useState<Offer>(cleanOffer());
+	const [offer, setOffer] = useState<IOffer>(cleanOffer());
 
 	const handlePublish = async () => {
 		setRequisitionResult(null);
@@ -159,7 +146,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{brandsList &&
 														brandsFiltered(keywordBrand, brandsList)?.map(
-															(brand: Brand) => {
+															(brand: IBrandData) => {
 																return (
 																	<div
 																		className={`${
@@ -203,7 +190,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{vehiclesList &&
 														carsFiltered(keywordVehicle, vehiclesList)?.map(
-															(vehicle: Vehicle) => {
+															(vehicle: IVehicleData) => {
 																return (
 																	<div
 																		className={`${
@@ -255,13 +242,15 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 										<option disabled key={0}>
 											selecione a categoria do seu auto
 										</option>
-										{categories?.map((category: Category): ReactElement => {
-											return (
-												<option value={category.id} key={category.id}>
-													{category.name}
-												</option>
-											);
-										})}
+										{categories?.map(
+											(category: ICategoryData): ReactElement => {
+												return (
+													<option value={category.id} key={category.id}>
+														{category.name}
+													</option>
+												);
+											}
+										)}
 									</AppStaticSelect>
 								</div>
 								<AppStaticButton

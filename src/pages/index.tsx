@@ -1,12 +1,12 @@
 import { GetServerSideProps, NextPage } from "next";
 import { ApiClient } from "../_services";
 import SectionIndex from "../../src/components/sections/SectionIndex";
-import { IndexAttributes } from "../interfaces/IndexAttributes";
+import { IPageIndexAttributes } from "../interfaces/Pages";
 
-const Index: NextPage<IndexAttributes> = ({
+const Index: NextPage<IPageIndexAttributes> = ({
 	brands,
 	offers,
-}: IndexAttributes) => {
+}: IPageIndexAttributes) => {
 	return <SectionIndex brands={brands} offers={offers} />;
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { ComponentChildren } from "../../../interfaces/ComponentChildren";
-const AppStaticTab = ({ children }: ComponentChildren) => {
+import { IComponentChildren } from "../../../interfaces/Pages";
+const AppStaticTab = ({ children }: IComponentChildren) => {
 	return <div className="w-full h-screen mt-10">{children}</div>;
 };
 
