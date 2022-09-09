@@ -55,7 +55,7 @@ const FormRegister = () => {
 
 	return (
 		<AppStaticForm>
-			<AppMutableAlert message={requisitionResult?.success} />
+			<AppMutableAlert message={{ success: requisitionResult?.success }} />
 			<AppStaticInput
 				{...emailRegisterInput}
 				validation={requisitionResult?.errors?.email ?? ""}

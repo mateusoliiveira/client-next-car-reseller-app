@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { IOfferData } from "../../../../src/interfaces/Offer";
+import { IOffer, IOfferData } from "../../../../src/interfaces/Offer";
 import { StepsOfferDone } from "../../../interfaces/Sections";
 
 const AppStaticSubmitOfferPath = ({
@@ -11,7 +11,7 @@ const AppStaticSubmitOfferPath = ({
 	nextStep,
 }: {
 	stepToCheck: StepsOfferDone;
-	offer: IOfferData;
+	offer: IOffer | IOfferData;
 	info: {
 		header: string;
 		description: string;

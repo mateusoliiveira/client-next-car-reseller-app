@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState, ReactElement } from "react";
 import { ApiClient } from "../../../_services";
 import { IBrandData } from "../../../interfaces/Brand";
 import { ICategoryData } from "../../../interfaces/Category";
-import { IOffer } from "../../../interfaces/Offer";
+import { IOffer, IOfferData } from "../../../interfaces/Offer";
 import { IVehicleData } from "../../../interfaces/Vehicle";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppStaticInput from "../inert/AppStaticInput";
@@ -146,7 +146,7 @@ const FormSubmitOffer = ({ categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{brandsList &&
 														brandsFiltered(keywordBrand, brandsList)?.map(
-															(brand: IBrandData) => {
+															(brand: any) => {
 																return (
 																	<div
 																		className={`${

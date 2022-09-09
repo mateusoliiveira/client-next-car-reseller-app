@@ -8,7 +8,7 @@ const AppMutableAlert = ({
 	status = 200,
 }: {
 	message: IRequisitionResult;
-	status: number;
+	status?: number;
 }) => {
 	return (
 		<div className="justify-center mb-5 mt-10">

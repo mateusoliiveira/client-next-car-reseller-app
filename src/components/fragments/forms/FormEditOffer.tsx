@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import React, { ChangeEvent, useState, ReactElement, useRef } from "react";
+import React, { ChangeEvent, useState, ReactElement } from "react";
 import { ApiClient } from "../../../_services";
 import { IBrandData } from "../../../interfaces/Brand";
-import { Category } from "../../../interfaces/Category";
-import { IOfferData, Offer, PostedOffer } from "../../../interfaces/Offer";
-import { Vehicle } from "../../../interfaces/Vehicle";
+import { ICategoryData } from "../../../interfaces/Category";
+import { IOfferData } from "../../../interfaces/Offer";
+import { IVehicleData } from "../../../interfaces/Vehicle";
 import AppStaticTab from "../inert/AppStaticTab";
 import AppStaticInput from "../inert/AppStaticInput";
 import {
@@ -35,14 +35,7 @@ import {
 } from "../../../_utils";
 import Image from "next/image";
 import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
-
-type Steps = {
-	first: JSX.Element;
-	second: JSX.Element;
-	third: JSX.Element;
-	fourth: JSX.Element;
-};
-type Stp = keyof Steps;
+import { StepsOffer } from "../../../interfaces/Sections";
 
 const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 	const navigate = useRouter();
@@ -60,7 +53,7 @@ const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 	);
 	const [keywordBrand, setKeywordBrand] = useState<string>("");
 	const [keywordVehicle, setKeywordVehicle] = useState<string>("");
-	const [actualStep, setActualStep] = useState<Stp>("first");
+	const [actualStep, setActualStep] = useState<StepsOffer>("first");
 	const [pictureUrl, setPictureUrl] = useState<string>(offer.picture);
 	const [actualOffer, setActualOffer] = useState<IOfferData>(offer);
 
@@ -148,7 +141,7 @@ const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{brandsList &&
 														brandsFiltered(keywordBrand, brandsList)?.map(
-															(brand: IBrandData) => {
+															(brand: any) => {
 																return (
 																	<div
 																		className={`${
@@ -192,7 +185,7 @@ const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 												<div className="h-40 overflow-auto mt-2">
 													{vehiclesList &&
 														carsFiltered(keywordVehicle, vehiclesList)?.map(
-															(vehicle: Vehicle) => {
+															(vehicle: IVehicleData) => {
 																return (
 																	<div
 																		className={`${
@@ -247,13 +240,15 @@ const FormEditOffer = ({ offer, categories, brands, token }: any) => {
 										<option disabled key={0}>
 											selecione a categoria do seu auto
 										</option>
-										{categories?.map((category: Category): ReactElement => {
-											return (
-												<option value={category.id} key={category.id}>
-													{category.name}
-												</option>
-											);
-										})}
+										{categories?.map(
+											(category: ICategoryData): ReactElement => {
+												return (
+													<option value={category.id} key={category.id}>
+														{category.name}
+													</option>
+												);
+											}
+										)}
 									</AppStaticSelect>
 								</div>
 								<AppStaticButton

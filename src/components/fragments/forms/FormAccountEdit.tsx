@@ -68,7 +68,7 @@ const FormAccountEdit = () => {
 
 	return (
 		<AppStaticForm>
-			<AppMutableAlert message={requisitionResult?.success} />
+			<AppMutableAlert message={{ success: requisitionResult?.success }} />
 			<AppStaticInput
 				{...nameEditInput}
 				validation={requisitionResult?.errors?.name ?? ""}
