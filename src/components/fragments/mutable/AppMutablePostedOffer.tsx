@@ -26,19 +26,19 @@ const AppMutablePostedOffer = ({ offer }: { offer: IOfferData }) => {
 							).toLocaleDateString()}`}
 						</h3>
 
-						<div className="bg-gray-800 p-3 rounded-lg mb-5">
+						<div className="bg-gray-800 rounded-lg mb-5 py-4 px-4">
 							<h1 className="text-gray-200 text-3xl title-font font-medium mb-1">
 								{offer.vehicles.name}
 							</h1>
 							<div className="flex mb-4">
 								<div className="flex items-center gap-3">
-									<div className="text-gray-600 flex gap-2">
+									<div className="text-gray-400 flex gap-2">
 										<div className="w-6 h-6 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
 											<GiCarDoor />
 										</div>
 										{offer.vehicles.doors}
 									</div>
-									<div className="text-gray-600 flex gap-2">
+									<div className="text-gray-400 flex gap-2">
 										<div className="w-6 h-6 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500">
 											<TbEngine />
 										</div>
@@ -57,7 +57,7 @@ const AppMutablePostedOffer = ({ offer }: { offer: IOfferData }) => {
 								</div>
 							</div>
 							<h3>o que o dono disse:</h3>
-							<p className="leading-relaxed text-blue-300 mb-2">
+							<p className="leading-relaxed text-blue-300">
 								{offer.description}
 							</p>
 						</div>
