@@ -1,9 +1,13 @@
 import React from "react";
-import { NewOfferAttributes } from "../../../src/interfaces/NewOfferAttributes";
+import { ISectionNewOfferAttributes } from "../../interfaces/Sections";
 import FormSubmitOffer from "../fragments/forms/FormSubmitOffer";
 import AppStaticContainer from "../fragments/inert/AppStaticContainer";
 
-const SectionNewOffer = ({ brands, categories, token }: NewOfferAttributes) => {
+const SectionNewOffer = ({
+	brands,
+	categories,
+	token,
+}: ISectionNewOfferAttributes) => {
 	return (
 		<AppStaticContainer>
 			<FormSubmitOffer brands={brands} categories={categories} token={token} />

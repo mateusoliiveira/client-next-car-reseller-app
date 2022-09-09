@@ -35,9 +35,16 @@ import {
 	parseSubmitOfferErrorFields,
 } from "../../../_utils";
 import { IRequisitionResult } from "../../../interfaces/RequisitionResult";
-import { StepsOffer } from "../../../interfaces/Sections";
+import {
+	ISectionNewOfferAttributes,
+	StepsOffer,
+} from "../../../interfaces/Sections";
 
-const FormSubmitOffer = ({ categories, brands, token }: any) => {
+const FormSubmitOffer = ({
+	categories,
+	brands,
+	token,
+}: ISectionNewOfferAttributes) => {
 	const navigate = useRouter();
 	const [requisitionResult, setRequisitionResult] =
 		useState<IRequisitionResult | null>(null);
