@@ -1,5 +1,5 @@
 import { Accordion, Select, TextInput } from "flowbite-react";
-import React, { ChangeEvent, ReactElement, useEffect, useState } from "react";
+import React, { useReducer, ReactElement, useEffect, useState } from "react";
 import AppMutablePostedOffer from "./AppMutableCardOffer";
 import AppStaticScrollCars from "../inert/AppStaticScrollCars";
 import { IOfferData } from "../../../interfaces/Offer";
@@ -17,6 +17,7 @@ import {
 	startYearFilterInput,
 } from "../forms/FormFilterOffersComponents";
 import AppStaticInputLabel from "../inert/AppStaticInputLabel";
+import AppStaticOfferNotFound from "../inert/AppStaticOfferNotFound";
 
 const AppMutableAvailableOffers = ({
 	query,
@@ -24,12 +25,41 @@ const AppMutableAvailableOffers = ({
 }: ISectionSearchOfferAttributes): ReactElement => {
 	const [availableOffersList, setAvailableOffersList] =
 		useState<IOfferData[]>(offers);
+	const [changeSort, setChangeSort] = useState<number>(0);
 	const [filters, setFilters] = useState<any>({ ...cleanFilters() });
+	const [offersListedBy, dispatch] = useReducer(
+		reducerShowBy,
+		availableOffersList
+	);
 
-	console.log(filters);
+	function reducerShowBy(offersListedBy: IOfferData[], action: any) {
+		setChangeSort(new Date().getTime());
+		switch (action.type) {
+			case "new":
+				return offersListedBy.sort(
+					(a: IOfferData, b: IOfferData) =>
+						new Date(a.created_at).getTime() + new Date(b.created_at).getTime()
+				);
+			case "old":
+				return offersListedBy.sort(
+					(a: IOfferData, b: IOfferData) =>
+						new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+				);
+			case "cheap":
+				return offersListedBy.sort(
+					(a: IOfferData, b: IOfferData) => Number(a.price) - Number(b.price)
+				);
+			case "expensive":
+				return offersListedBy.sort(
+					(a: IOfferData, b: IOfferData) => Number(a.price) + Number(b.price)
+				);
+			default:
+				return offersListedBy;
+		}
+	}
 
 	const allOrFiltered = () => {
-		let toFilter: IOfferData[] = availableOffersList;
+		let toFilter: IOfferData[] = offersListedBy;
 
 		if (filters.name && filters.name.trim() !== "") {
 			toFilter = toFilter.filter((offer: IOfferData) =>
@@ -88,19 +118,45 @@ const AppMutableAvailableOffers = ({
 				if (filters.is_automatic === 2) return offer.vehicles.is_automatic;
 			});
 		}
+
 		return toFilter;
 	};
 
 	useEffect(() => {
 		allOrFiltered();
-	}, [filters]);
+	}, [filters, changeSort]);
 
 	return (
 		<div className="px-5 lg:flex lg:justify-center gap-5 mt-10">
 			<div className="flex-column lg:w-72 mb-6">
 				<div className="text-2xl p-3 mb-3 text-gray-50 font-bold bg-gradient-to-r from-red-600 to-orange-200 rounded-lg">
 					<p className="text-bold text-sm">filtrando por</p>
-					{query}
+					<p>{query}</p>
+					<div className="flex-col justify-center text-red-600 font-bold min-w-100">
+						<AppStaticInputLabel
+							id="select-transmission"
+							style="text-white text-sm"
+							title={"mostrando por"}
+						/>
+
+						<Select
+							id="select-transmission"
+							onChange={(e) => dispatch({ type: e.target.value })}
+						>
+							<option className="mx-36" value={"new"}>
+								Mais recentes
+							</option>
+							<option className="mx-36" value={"old"}>
+								Mais antigos
+							</option>
+							<option className="mx-36" value={"cheap"}>
+								Menor Preço
+							</option>
+							<option className="mx-36" value={"expensive"}>
+								Maior Preço
+							</option>
+						</Select>
+					</div>
 				</div>
 				<Accordion>
 					<Accordion.Panel>
@@ -246,15 +302,10 @@ const AppMutableAvailableOffers = ({
 			</div>
 			<AppStaticScrollCars>
 				{(availableOffersList.length > 0 &&
+					allOrFiltered().length > 0 &&
 					allOrFiltered().map((offer: IOfferData, index: number) => {
 						return <AppMutablePostedOffer key={index} offer={offer} />;
-					})) || (
-					<div className="m-auto px-2 flex align-middle">
-						<span className="text-gray-200 font-bold my-10">
-							oops, não há veículos com esses parâmetros
-						</span>
-					</div>
-				)}
+					})) || <AppStaticOfferNotFound />}
 			</AppStaticScrollCars>
 		</div>
 	);
