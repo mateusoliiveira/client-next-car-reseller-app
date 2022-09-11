@@ -5,6 +5,18 @@ import AppStaticScrollCars from "../inert/AppStaticScrollCars";
 import { IOfferData } from "../../../interfaces/Offer";
 import { cleanFilters, handleCleanFilter } from "../../../_utils";
 import { ISectionSearchOfferAttributes } from "../../../interfaces/Sections";
+import AppStaticInput from "../inert/AppStaticInput";
+import {
+	cylindersFilterInput,
+	displacementFilterInput,
+	doorsVehicleFilterInput,
+	endPriceFilterInput,
+	endYearFilterInput,
+	modelVehicleFilterInput,
+	startPriceFilterInput,
+	startYearFilterInput,
+} from "../forms/FormFilterOffersComponents";
+import AppStaticInputLabel from "../inert/AppStaticInputLabel";
 
 const AppMutableAvailableOffers = ({
 	query,
@@ -36,8 +48,8 @@ const AppMutableAvailableOffers = ({
 		if (filters.price_start <= filters.price_end) {
 			toFilter = toFilter.filter(
 				(offer: IOfferData) =>
-					parseFloat(offer.price) >= parseFloat(filters.price_start) &&
-					parseFloat(offer.price) <= parseFloat(filters.price_end)
+					parseFloat(offer.price) > parseFloat(filters.price_start) &&
+					parseFloat(offer.price) < parseFloat(filters.price_end)
 			);
 		}
 
@@ -85,7 +97,7 @@ const AppMutableAvailableOffers = ({
 
 	return (
 		<div className="px-5 lg:flex lg:justify-center gap-5 mt-10">
-			<div className="flex-column mb-6">
+			<div className="flex-column lg:w-72 mb-6">
 				<div className="text-2xl p-3 mb-3 text-gray-50 font-bold bg-gradient-to-r from-red-600 to-orange-200 rounded-lg">
 					<p className="text-bold text-sm">filtrando por</p>
 					{query}
@@ -94,152 +106,122 @@ const AppMutableAvailableOffers = ({
 					<Accordion.Panel>
 						<Accordion.Title>Modelo e litragem</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center gap-4 text-red-600 font-bold">
-								<div className="mb-1">
-									<TextInput
-										id="name"
-										type="text"
-										placeholder="modelo"
-										onChange={(e: ChangeEvent<HTMLInputElement>) =>
-											setFilters({
-												...filters,
-												name: handleCleanFilter(e.target.value),
-											})
-										}
-									/>
-								</div>
+							<div className="flex-col justify-center gap-4 text-red-600 font-bold">
+								<AppStaticInput
+									{...modelVehicleFilterInput}
+									onChange={(e: any) =>
+										setFilters({
+											...filters,
+											name: e.target.value,
+										})
+									}
+								/>
 								<div className="flex row justify-evenly lg:justify-center gap-1">
-									<TextInput
-										id="doors"
-										type="number"
-										placeholder="portas"
-										onChange={(e) =>
+									<AppStaticInput
+										{...doorsVehicleFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												doors: handleCleanFilter(Number(e.target.value)),
+												doors: e.target.value,
 											})
 										}
 									/>
-									<TextInput
-										id="liters"
-										type="number"
-										placeholder="litragem"
-										onChange={(e) =>
+									<AppStaticInput
+										{...displacementFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												liters: handleCleanFilter(parseFloat(e.target.value)),
+												liters: e.target.value,
 											})
 										}
 									/>
 								</div>
-							</form>
+							</div>
 						</Accordion.Content>
 					</Accordion.Panel>
 					<Accordion.Panel>
 						<Accordion.Title>Ano</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center gap-4 text-red-600 font-bold ">
+							<div className="flex-col justify-center gap-4 text-red-600 font-bold ">
 								<div className="flex row justify-evenly lg:justify-center gap-1">
-									<TextInput
-										defaultValue={filters.year_start}
-										id="yearStart"
-										type="number"
-										placeholder="2016"
-										onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									<AppStaticInput
+										{...startYearFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												year_start: Number(e.target.value),
+												year_start: e.target.value,
 											})
 										}
 									/>
-									<TextInput
-										defaultValue={filters.year_end}
-										id="yearEnd"
-										type="number"
-										placeholder="2021"
-										onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									<AppStaticInput
+										{...endYearFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												year_end: Number(e.target.value),
+												year_end: e.target.valee,
 											})
 										}
 									/>
 								</div>
-							</form>
+							</div>
 						</Accordion.Content>
 					</Accordion.Panel>
 					<Accordion.Panel>
 						<Accordion.Title>Preço</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center gap-4 text-red-600 font-bold ">
+							<div className="flex-col justify-center gap-4 text-red-600 font-bold ">
 								<div className="flex row justify-evenly lg:justify-center gap-1">
-									<TextInput
-										defaultValue={filters.price_start}
-										id="priceStart"
-										type="number"
-										step={0.1}
-										placeholder="15000"
-										onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									<AppStaticInput
+										{...startPriceFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												price_start: parseFloat(e.target.value),
+												price_start: e.target.value,
 											})
 										}
 									/>
-									<TextInput
-										defaultValue={filters.price_end}
-										id="priceEnd"
-										type="number"
-										step={0.1}
-										placeholder="36000"
-										onChange={(e: ChangeEvent<HTMLInputElement>) =>
+									<AppStaticInput
+										{...endPriceFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												price_end: parseFloat(e.target.value),
+												price_end: e.target.value,
 											})
 										}
 									/>
 								</div>
-							</form>
+							</div>
 						</Accordion.Content>
 					</Accordion.Panel>
 					<Accordion.Panel>
 						<Accordion.Title>Motorização</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center gap-4 text-red-600 font-bold ">
+							<div className="flex-col justify-center gap-4 text-red-600 font-bold ">
 								<div className="flex row justify-evenly lg:justify-center gap-1">
-									<TextInput
-										id="cylinders"
-										type="number"
-										placeholder="cilindros"
-										onChange={(e) =>
+									<AppStaticInput
+										{...cylindersFilterInput}
+										onChange={(e: any) =>
 											setFilters({
 												...filters,
-												cylinders: handleCleanFilter(Number(e.target.value)),
-											})
-										}
-									/>
-									<TextInput
-										id="horsepowers"
-										type="number"
-										placeholder="até ... cavalos"
-										onChange={(e) =>
-											setFilters({
-												...filters,
-												horsepower: handleCleanFilter(Number(e.target.value)),
+												cylinders: e.target.value,
 											})
 										}
 									/>
 								</div>
-							</form>
+							</div>
 						</Accordion.Content>
 					</Accordion.Panel>
 					<Accordion.Panel>
 						<Accordion.Title>Câmbio</Accordion.Title>
 						<Accordion.Content>
-							<form className="flex-col justify-center text-red-600 font-bold -mx-1 min-w-100">
+							<div className="flex-col justify-center text-red-600 font-bold -mx-1 min-w-100">
+								<AppStaticInputLabel
+									id="select-transmission"
+									title={"transmissão"}
+								/>
+
 								<Select
-									id="countries"
+									id="select-transmission"
 									onChange={(e: any) =>
 										setFilters({
 											...filters,
@@ -257,17 +239,15 @@ const AppMutableAvailableOffers = ({
 										Automático
 									</option>
 								</Select>
-							</form>
+							</div>
 						</Accordion.Content>
 					</Accordion.Panel>
 				</Accordion>
 			</div>
 			<AppStaticScrollCars>
 				{(availableOffersList.length > 0 &&
-					allOrFiltered().map((offer: IOfferData) => {
-						return (
-							<AppMutablePostedOffer key={offer.vehicles.id} offer={offer} />
-						);
+					allOrFiltered().map((offer: IOfferData, index: number) => {
+						return <AppMutablePostedOffer key={index} offer={offer} />;
 					})) || (
 					<div className="m-auto px-2 flex align-middle">
 						<span className="text-gray-200 font-bold my-10">
