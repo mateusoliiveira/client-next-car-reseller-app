@@ -38,7 +38,7 @@ const AppMutableAvailableOffers = ({
 			case "new":
 				return offersListedBy.sort(
 					(a: IOfferData, b: IOfferData) =>
-						new Date(a.created_at).getTime() + new Date(b.created_at).getTime()
+						new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
 				);
 			case "old":
 				return offersListedBy.sort(
@@ -51,7 +51,7 @@ const AppMutableAvailableOffers = ({
 				);
 			case "expensive":
 				return offersListedBy.sort(
-					(a: IOfferData, b: IOfferData) => Number(a.price) + Number(b.price)
+					(a: IOfferData, b: IOfferData) => Number(b.price) - Number(a.price)
 				);
 			default:
 				return offersListedBy;
